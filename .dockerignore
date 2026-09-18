@@ -1,0 +1,10 @@
+.git
+.gitignore
+node_modules
+npm-debug.log
+yarn-error.log
+.idea
+.vscode
+*.sqlite
+.env
+docker/mysql_data

@@ -1,0 +1,82 @@
+name: Laravel POS CI
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  php-tests:
+    name: PHP 7.4 & Database Tests
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mariadb:10.5
+        env:
+          MYSQL_DATABASE: pos_aisyah
+          MYSQL_USER: pos_user
+          MYSQL_PASSWORD: pos_password
+          MYSQL_ROOT_PASSWORD: root_password
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 7.4 & Composer 2.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer:v2.2
+          extensions: mbstring, pdo, pdo_mysql, gd, zip, bcmath, json, curl
+
+      - name: Check PHP Syntax
+        run: |
+          echo "Memeriksa sintaks seluruh file PHP..."
+          find app config database routes tests -name "*.php" -exec php -l {} +
+
+      - name: Setup Environment Configuration
+        run: |
+          cp .env.example .env
+          sed -i 's/DB_HOST=.*/DB_HOST=127.0.0.1/' .env
+          sed -i 's/DB_PORT=.*/DB_PORT=3306/' .env
+          sed -i 's/DB_DATABASE=.*/DB_DATABASE=pos_aisyah/' .env
+          sed -i 's/DB_USERNAME=.*/DB_USERNAME=pos_user/' .env
+          sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=pos_password/' .env
+
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
+      - name: Run Database Migrations
+        run: php artisan migrate --force
+
+      - name: Run Database Seeders
+        run: php artisan db:seed --force
+
+      - name: Run Feature and Unit Tests
+        run: vendor/bin/phpunit
+
+  docker-build:
+    name: Docker Build & Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose Configuration
+        run: docker compose config
+
+      - name: Build Docker Image
+        run: docker compose build

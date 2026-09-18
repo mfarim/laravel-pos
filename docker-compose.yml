@@ -1,0 +1,47 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_pos_app
+    ports:
+      - "8000:80"
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=pos_aisyah
+      - DB_USERNAME=pos_user
+      - DB_PASSWORD=pos_password
+      - APP_URL=http://localhost:8000
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - pos_network
+
+  db:
+    image: mariadb:10.5
+    container_name: laravel_pos_db
+    environment:
+      MYSQL_DATABASE: pos_aisyah
+      MYSQL_USER: pos_user
+      MYSQL_PASSWORD: pos_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "33066:3306"
+    volumes:
+      - pos_db_data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - pos_network
+
+volumes:
+  pos_db_data:
+    driver: local
+
+networks:
+  pos_network:
+    driver: bridge

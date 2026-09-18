@@ -312,7 +312,7 @@ class PenjagaController extends Controller
 
             if($request->has('q')){
                 $search = $request->q;
-                $data = Barang::select("id","kode_barang","nama_barang","harga_jual","diskon_barang")
+                $data = Barang::select("id","kode_barang","nama_barang","harga_jual","diskon")
                     ->where('kode_barang','LIKE',"%$search%")
                     ->get();
             }
