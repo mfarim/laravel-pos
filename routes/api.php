@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 | POS SaaS Mobile REST API Routes (V1)
 |--------------------------------------------------------------------------
 |
-| Version 1 of the REST API designed for Mobile POS (Flutter, Android, iOS),
-| Tablets, and External POS integrations.
+| Version 1 of the REST API designed for Mobile POS (React Native, Flutter,
+| Android, iOS), Tablets, and External POS integrations.
 |
 */
 
