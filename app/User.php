@@ -7,21 +7,23 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
 
 use App\Scopes\MemberScope;
-
+use App\Traits\HasUuid;
 
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
     use Notifiable;
 
+    use HasUuid;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
     protected $fillable = [
-        'name','username', 'email', 'password',
+        'uuid', 'name', 'username', 'email', 'phone', 'password',
+        'tenant_id', 'pin', 'api_token', 'is_superadmin', 'locale',
     ];
 
     /**
@@ -30,6 +32,41 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'pin', 'api_token',
     ];
+
+    protected $casts = [
+        'is_superadmin' => 'boolean',
+    ];
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class, 'tenant_id');
+    }
+
+    public function outlets()
+    {
+        return $this->belongsToMany(Outlet::class, 'user_outlets', 'user_id', 'outlet_id')
+            ->withPivot('is_default')
+            ->withTimestamps();
+    }
+
+    public function defaultOutlet()
+    {
+        return $this->outlets()->wherePivot('is_default', true)->first()
+            ?: $this->outlets()->first();
+    }
+
+    public function isSuperAdmin()
+    {
+        return (bool) $this->is_superadmin;
+    }
+
+    public function hasOutlet($outletId)
+    {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+        return $this->outlets()->where('outlets.id', $outletId)->exists();
+    }
 }
