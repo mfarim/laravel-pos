@@ -1,9 +1,7 @@
 FROM php:7.4-apache
 
-# Fix Debian Bullseye archive repositories (mencegah error 404 pada paket yang diarsipkan)
-RUN sed -i 's|deb.debian.org/debian-security|archive.debian.org/debian-security|g' /etc/apt/sources.list && \
-    sed -i 's|deb.debian.org/debian|archive.debian.org/debian|g' /etc/apt/sources.list && \
-    sed -i '/bullseye-updates/d' /etc/apt/sources.list && \
+# Menggunakan repositori arsip resmi Debian Bullseye (bebas error 404)
+RUN echo "deb http://archive.debian.org/debian bullseye main" > /etc/apt/sources.list && \
     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
