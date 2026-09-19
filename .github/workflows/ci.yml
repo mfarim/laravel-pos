@@ -53,6 +53,8 @@ jobs:
           sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=pos_password/' .env
 
       - name: Install Composer Dependencies
+        env:
+          COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.GITHUB_TOKEN }}"}}'
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Generate Application Key

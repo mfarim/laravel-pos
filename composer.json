@@ -4,10 +4,16 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/icfilho/ConsoleTVs-Charts-5x.git"
+        }
+    ],
     "require": {
         "php": ">=7.0.0",
         "atnic/laravel-light-bootstrap-dashboard": "^0.2.0",
-        "consoletvs/charts": "5.*",
+        "icfilho/consoletvs-charts": "^1.0",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
@@ -56,6 +62,9 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     }
 }

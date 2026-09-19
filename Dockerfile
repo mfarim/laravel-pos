@@ -1,19 +1,18 @@
 FROM php:7.4-apache
 
-# Update package repository dan install dependencies sistem
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    libzip-dev \
-    zip \
-    unzip \
-    git \
-    curl \
-    default-mysql-client \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql gd zip bcmath opcache \
+# Menggunakan repositori arsip resmi Debian Bullseye (bebas error 404)
+RUN echo "deb http://archive.debian.org/debian bullseye main" > /etc/apt/sources.list && \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        git \
+        unzip \
+        default-mysql-client \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install ekstensi PHP menggunakan installer resmi mlocati
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions pdo_mysql gd zip bcmath opcache
 
 # Aktifkan mod_rewrite Apache untuk routing Laravel
 RUN a2enmod rewrite
