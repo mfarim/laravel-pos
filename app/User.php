@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
 
 use App\Scopes\MemberScope;
-
+use App\Traits\HasUuid;
 
 class User extends Authenticatable
 {
