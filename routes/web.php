@@ -12,8 +12,11 @@
 */
 
 Route::get('/', function(){
-  return redirect()->route('login');
-});
+  return view('landing');
+})->name('landing');
+
+Route::get('/auth/google', 'Auth\GoogleAuthController@redirectToGoogle')->name('auth.google');
+Route::get('/auth/google/callback', 'Auth\GoogleAuthController@handleGoogleCallback')->name('auth.google.callback');
 Route::group(['middleware' => ['auth']], function (){
   //grafikpenjualan
   Route::get('/grafik','laporanController@grafikpenjualan')->name('grafikpenjualan');
