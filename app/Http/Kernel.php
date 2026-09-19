@@ -59,6 +59,14 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'role' => \Laratrust\Middleware\LaratrustRole::class,
         'permission' => \Laratrust\Middleware\LaratrustPermission::class,
-        'ability' => \Laratrust\Middleware\LaratrustAbility::class
+        'ability' => \Laratrust\Middleware\LaratrustAbility::class,
+
+        // SaaS & Tenant Middlewares
+        'tenant.scope' => \App\Http\Middleware\EnsureTenantScope::class,
+        'subscription.status' => \App\Http\Middleware\CheckSubscriptionStatus::class,
+        'subscription.block_frozen' => \App\Http\Middleware\BlockFrozenWrite::class,
+        'feature' => \App\Http\Middleware\CheckSubscriptionFeature::class,
+        'superadmin' => \App\Http\Middleware\EnsureSuperAdmin::class,
+        'auth.api_token' => \App\Http\Middleware\AuthenticateWithApiToken::class,
     ];
 }
