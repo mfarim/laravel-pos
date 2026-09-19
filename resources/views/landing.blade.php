@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SaaS POS Multi-Tenant - Aplikasi Kasir Cloud, Resep BOM & Mobile API (Gratis)</title>
-    <meta name="description" content="Platform Point of Sale (POS) Multi-Tenant & Multi-Outlet berbasis Cloud. Lengkap dengan resep bahan baku (BOM), shift kasir, parkir pesanan, offline sync, dan REST API untuk React Native & Flutter. 100% Gratis cukup Login dengan Google.">
-    <meta name="keywords" content="POS SaaS, Point of Sale Indonesia, Aplikasi Kasir Gratis, Multi Tenant POS, Resep BOM, Kasir Mobile React Native Flutter, POS Multi Cabang">
+    <meta name="description" content="Platform Point of Sale (POS) Multi-Tenant & Multi-Outlet berbasis Cloud. Dilengkapi resep bahan baku (BOM), shift kasir, parkir pesanan, offline sync, dan REST API untuk React Native & Flutter. 100% Gratis cukup Login dengan Google.">
+    <meta name="keywords" content="POS SaaS, Point of Sale Indonesia, Aplikasi Kasir Gratis, Multi Tenant POS, Resep BOM, Kasir Mobile React Native Flutter, POS Multi Cabang, Tema Terang Ungu">
     <meta name="author" content="POS Aisyah Cloud">
 
     <!-- Open Graph / Meta Social -->
@@ -26,7 +26,7 @@
 <body>
 
     <!-- ==========================================================================
-       Header / Navbar
+       Header / Navbar (Tema Terang)
        ========================================================================== -->
     <header class="site-header" id="navbar">
         <div class="container">
@@ -48,7 +48,7 @@
                 <div class="nav-actions">
                     <a href="{{ route('login') }}" class="btn-login-outline" id="btn-nav-login">Login Kasir</a>
                     <a href="{{ route('auth.google') }}" class="btn-google-nav" id="btn-nav-google">
-                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#ffffff" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#ffffff" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#ffffff" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
                         <span>Masuk Google</span>
                     </a>
                 </div>
@@ -58,7 +58,7 @@
 
     <main>
         <!-- ==========================================================================
-           Hero Section
+           Hero Section (Tema Terang Ungu)
            ========================================================================== -->
         <section class="hero-section" id="hero">
             <div class="hero-glow"></div>
@@ -66,15 +66,15 @@
                 <div class="hero-content">
                     <div class="pill-announcement" id="hero-badge">
                         <span class="pill-tag">100% GRATIS</span>
-                        <span>Cukup Login dengan Google • Langsung Pakai Tanpa Kartu Kredit</span>
+                        <span>Cukup Login Akun Google • Langsung Aktif Tanpa Kartu Kredit</span>
                     </div>
 
                     <h1 class="hero-title">
-                        Platform Kasir <span class="gradient-text">Multi-Tenant SaaS</span> dengan Resep BOM & Mobile API
+                        Sistem Kasir Modern <span class="gradient-text">Multi-Tenant Cloud</span> untuk Bisnis Ritel & F&B
                     </h1>
 
                     <p class="hero-subtitle">
-                        Kelola penjualan multi-cabang, resep bahan baku otomatis, shift laci kasir, dan sinkronisasi offline. Siap terhubung langsung ke aplikasi kasir mobile berbasis <strong>React Native</strong> dan <strong>Flutter</strong>.
+                        Tingkatkan efisiensi operasional toko dan cabang Anda. Dilengkapi resep bahan baku otomatis (BOM), kontrol shift laci kasir, parkir pesanan, serta integrasi <strong>REST API V1</strong> siap pakai untuk aplikasi kasir <strong>React Native</strong> dan <strong>Flutter</strong>.
                     </p>
 
                     <div class="hero-cta-group">
@@ -85,14 +85,14 @@
 
                         <a href="#fitur" class="btn-demo-secondary" id="hero-cta-features">
                             <span>Jelajahi Fitur</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
                     </div>
 
                     <div class="hero-trust-badges">
                         <div class="trust-item">
                             <span class="icon">✓</span>
-                            <span>Gratis 1 Tahun</span>
+                            <span>Gratis Selamanya</span>
                         </div>
                         <div class="trust-item">
                             <span class="icon">✓</span>
@@ -104,12 +104,12 @@
                         </div>
                         <div class="trust-item">
                             <span class="icon">✓</span>
-                            <span>Dukungan React Native & Flutter</span>
+                            <span>React Native & Flutter Ready</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Showcase Preview Window -->
+                <!-- Showcase Preview Window (Light Frame) -->
                 <div class="hero-mockup-wrapper">
                     <div class="mockup-inner">
                         <div class="mockup-header-bar">
@@ -119,7 +119,7 @@
                                 <span class="dot dot-green"></span>
                             </div>
                             <div class="browser-url">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                                 <span>https://pos-saas.app/pemilik/transaksi</span>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
 
                             <div class="floating-widget widget-right">
                                 <div class="widget-label">Stok Bahan Baku (BOM)</div>
-                                <div class="widget-value" style="color: #38bdf8;">Otomatis Terpotong 100%</div>
+                                <div class="widget-value">Otomatis Terpotong 100%</div>
                             </div>
                         </div>
                     </div>
@@ -144,7 +144,7 @@
         </section>
 
         <!-- ==========================================================================
-           Stats Strip
+           Stats Strip (Tema Terang)
            ========================================================================== -->
         <section class="stats-section" aria-label="Statistik Platform">
             <div class="container">
@@ -158,7 +158,7 @@
                         <div class="stat-label">Latensi REST API Mobile</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">2 Framework</div>
+                        <div class="stat-number">2 Mobile SDK</div>
                         <div class="stat-label">React Native & Flutter Ready</div>
                     </div>
                     <div class="stat-item">
@@ -175,10 +175,10 @@
         <section class="features-section" id="fitur">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Arsitektur Modern</span>
-                    <h2 class="section-title">Solusi POS Terlengkap untuk Skala Usaha Mandiri hingga Waralaba</h2>
+                    <span class="section-tag">Fitur Lengkap</span>
+                    <h2 class="section-title">Semua Kebutuhan Bisnis Ritel & F&B dalam Satu Aplikasi</h2>
                     <p class="section-subtitle">
-                        Dibangun dengan fondasi arsitektur multi-tenant, menjamin data toko Anda terisolasi aman, performa secepat kilat, dan siap dikembangkan kapan saja.
+                        Didukung arsitektur multi-tenant berstandar enterprise untuk menjamin isolasi data toko yang aman, performa transaksi cepat, dan skalabilitas tanpa batas.
                     </p>
                 </div>
 
@@ -186,9 +186,9 @@
                     <!-- Feature 1 -->
                     <article class="feature-card highlight" id="feature-tenant">
                         <div class="feature-icon-box">🏢</div>
-                        <h3>Multi-Tenant & Multi-Outlet</h3>
+                        <h3>Multi-Tenant & Multi-Cabang</h3>
                         <p>
-                            Satu akun dapat menaungi banyak cabang usaha. Setiap outlet memiliki katalog harga, stok gudang, dan staf kasirnya masing-masing dengan isolasi data terenkripsi.
+                            Kelola outlet pusat dan cabang-cabang waralaba dalam satu sistem terpadu. Tiap outlet memiliki data inventaris, daftar harga, dan akses staf kasir tersendiri.
                         </p>
                     </article>
 
@@ -197,16 +197,16 @@
                         <div class="feature-icon-box emerald">🥣</div>
                         <h3>Resep & Bill of Materials (BOM)</h3>
                         <p>
-                            Ideal untuk F&B dan retail produksi. Saat menu <em>Es Kopi Susu</em> terjual, sistem otomatis menghitung dan memotong gramatur biji kopi, susu, dan sirup di gudang.
+                            Sangat cocok untuk bisnis kuliner dan kafe. Setiap kali minuman atau makanan terjual di kasir, gramatur bahan baku di gudang otomatis terpotong secara akurat.
                         </p>
                     </article>
 
                     <!-- Feature 3 -->
                     <article class="feature-card highlight" id="feature-mobile">
-                        <div class="feature-icon-box purple">📱</div>
+                        <div class="feature-icon-box blue">📱</div>
                         <h3>Mobile POS (React Native & Flutter)</h3>
                         <p>
-                            Dilengkapi REST API V1 yang teruji untuk integrasi aplikasi mobile di tablet kasir, smartphone Android/iOS, maupun mesin POS portabel (Sunmi, Pax, dsb).
+                            Didukung REST API V1 ultra-cepat yang dirancang khusus untuk integrasi kasir tablet, smartphone Android/iOS, maupun mesin POS cerdas (Sunmi, Pax, iMin).
                         </p>
                     </article>
 
@@ -215,16 +215,16 @@
                         <div class="feature-icon-box amber">⏱️</div>
                         <h3>Manajemen Shift & Laci Kasir</h3>
                         <p>
-                            Kontrol uang kasir secara ketat dengan pencatatan kas modal awal, kas masuk/keluar, kas akhir saat pergantian shift, dan kalkulasi otomatis selisih kas.
+                            Pencatatan kas modal awal, kas masuk/keluar, kas akhir saat pergantian shift, dan kalkulasi otomatis selisih kas untuk mencegah kebocoran uang kasir.
                         </p>
                     </article>
 
                     <!-- Feature 5 -->
                     <article class="feature-card" id="feature-park">
                         <div class="feature-icon-box emerald">⏸️</div>
-                        <h3>Parkir Pesanan & Split-Payment</h3>
+                        <h3>Parkir Pesanan & Multi-Payment</h3>
                         <p>
-                            Tahan sementara pesanan pelanggan meja atau antrean dan lanjutkan kembali saat pembayaran. Terima kombinasi bayar Tunai, QRIS, dan Kartu Debit dalam satu struk.
+                            Tahan sementara pesanan meja atau antrean dan lanjutkan pembayaran nanti. Terima kombinasi pembayaran Tunai, QRIS dinamis, dan Kartu Debit/Kredit dalam satu struk.
                         </p>
                     </article>
 
@@ -233,7 +233,7 @@
                         <div class="feature-icon-box">🛡️</div>
                         <h3>Otorisasi PIN Supervisor</h3>
                         <p>
-                            Cegah kecurangan kasir. Aksi pembatalan (void), pengembalian dana (refund), dan diskon khusus mewajibkan verifikasi 6-digit PIN Supervisor dengan audit log lengkap.
+                            Perlindungan transaksi tingkat tinggi. Pembatalan pesanan (void), diskon khusus, dan retur barang mewajibkan verifikasi 6-digit PIN Supervisor dengan audit log lengkap.
                         </p>
                     </article>
                 </div>
@@ -241,21 +241,21 @@
         </section>
 
         <!-- ==========================================================================
-           Section: Interactive Demo Tabs
+           Section: Interactive Demo Tabs (Tema Terang)
            ========================================================================== -->
         <section class="demo-section" id="demo">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Antarmuka Sistem</span>
-                    <h2 class="section-title">Lihat Kemudahan Operasional Langsung dari Layar</h2>
+                    <span class="section-tag">Antarmuka Aplikasi</span>
+                    <h2 class="section-title">Pratinjau Layar Operasional Toko</h2>
                     <p class="section-subtitle">
-                        Desain UI yang bersih, responsif, dan mudah digunakan bahkan oleh staf kasir baru tanpa perlu pelatihan berhari-hari.
+                        Antarmuka pengguna yang bersih, responsif, dan intuitif. Memudahkan kasir dan pemilik toko bekerja lebih cepat tanpa hambatan teknis.
                     </p>
                 </div>
 
                 <div class="tabs-nav" role="tablist">
                     <button class="tab-btn active" data-tab="tab-pos" id="tab-btn-pos">
-                        <span>🛒</span> Terminal Penjualan Kasir
+                        <span>🛒</span> Terminal Kasir
                     </button>
                     <button class="tab-btn" data-tab="tab-restock" id="tab-btn-restock">
                         <span>📦</span> Pembelian & Restock
@@ -271,46 +271,46 @@
                 <!-- Tab Panel 1: Kasir -->
                 <div class="tab-content-panel active" id="tab-pos">
                     <div class="tab-text">
-                        <h3>Layar Kasir Cepat & Praktis</h3>
+                        <h3>Layar Transaksi Kasir Responsif</h3>
                         <p>
-                            Pencarian instan melalui barcode scanner atau nama produk. Hitung diskon member, pajak otomatis, dan cetak struk belanja thermal dalam hitungan detik.
+                            Pencarian instan melalui scan barcode atau ketik nama produk. Hitung diskon member, kalkulasi pajak otomatis, dan cetak struk thermal dalam hitungan detik.
                         </p>
                         <ul class="tab-checklist">
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                 <span>Mendukung barcode scanner USB & Bluetooth</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Multi-pembayaran: Cash, QRIS, EDC Bank</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Multi-pembayaran: Tunai, QRIS, EDC Bank</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Fitur parkir keranjang belanja untuk melayani antrean lain</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Parkir keranjang belanja untuk melayani antrean lain</span>
                             </li>
                         </ul>
-                        <a href="{{ route('auth.google') }}" class="btn-google-primary">Uji Coba Sekarang (Gratis)</a>
+                        <a href="{{ route('auth.google') }}" class="btn-demo-secondary" style="display: inline-flex;">Coba Langsung (100% Gratis)</a>
                     </div>
                     <div class="tab-media-box">
-                        <img src="{{ asset('images/screenshots/penjaga-transaksi-penjualan.png') }}" alt="Terminal Penjualan Kasir">
+                        <img src="{{ asset('images/screenshots/penjaga-transaksi-penjualan.png') }}" alt="Terminal Kasir">
                     </div>
                 </div>
 
                 <!-- Tab Panel 2: Pembelian -->
                 <div class="tab-content-panel" id="tab-restock">
                     <div class="tab-text">
-                        <h3>Pencatatan Masuk Stok & Supplier</h3>
+                        <h3>Pencatatan Restock & Supplier</h3>
                         <p>
-                            Catat pembelian barang dagangan atau bahan baku mentah dari supplier secara rapi. Stok gudang otomatis bertambah dan jurnal pengeluaran kas tercatat otomatis.
+                            Catat transaksi masuk barang dagangan atau bahan baku mentah dari supplier. Stok gudang otomatis bertambah dan jurnal pengeluaran kas tercatat rapi.
                         </p>
                         <ul class="tab-checklist">
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Cetak Purchase Order (PO) & Bukti Masuk Barang</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Cetak Purchase Order (PO) & Bukti Penerimaan Barang</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Riwayat histori harga beli per pemasok</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Histori harga beli supplier untuk evaluasi margin laba</span>
                             </li>
                         </ul>
                     </div>
@@ -322,18 +322,18 @@
                 <!-- Tab Panel 3: Analitik -->
                 <div class="tab-content-panel" id="tab-analytics">
                     <div class="tab-text">
-                        <h3>Grafik Penjualan & Laba Real-Time</h3>
+                        <h3>Visualisasi Penjualan & Laba Bersih</h3>
                         <p>
-                            Pantau tren omset tahunan, produk terlaris, dan kinerja kasir dalam bentuk visual interaktif. Membantu pemilik usaha mengambil keputusan ekspansi berbasis data.
+                            Pantau tren omset penjualan bulanan, menu terlaris, dan kinerja kasir dalam bentuk grafik visual yang informatif untuk memudahkan pengambilan keputusan bisnis.
                         </p>
                         <ul class="tab-checklist">
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Laporan laba kotor & buku kas otomatis</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Laporan laba kotor & arus kas otomatis</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Kartu persediaan barang masuk & keluar</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Kartu persediaan barang masuk dan keluar per SKU</span>
                             </li>
                         </ul>
                     </div>
@@ -345,18 +345,18 @@
                 <!-- Tab Panel 4: Katalog -->
                 <div class="tab-content-panel" id="tab-catalog">
                     <div class="tab-text">
-                        <h3>Katalog Produk, Varian & Resep</h3>
+                        <h3>Master Produk, Varian & Formula Resep</h3>
                         <p>
-                            Kelola ribuan SKU barang dengan kategori bertingkat, satuan unit (Pcs, Kg, Liter), varian harga, serta formula resep bahan baku yang fleksibel.
+                            Kelola ribuan SKU produk dengan kategori bertingkat, satuan unit (Pcs, Gram, Liter), varian harga, serta formula resep bahan baku yang fleksibel.
                         </p>
                         <ul class="tab-checklist">
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                 <span>Auto-generate barcode format EAN/Code128</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Notifikasi peringatan saat stok mendekati batas minimum</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Peringatan stok minimum sebelum bahan baku habis</span>
                             </li>
                         </ul>
                     </div>
@@ -379,22 +379,22 @@
                             <span class="badge-tech">🐦 Flutter</span>
                             <span class="badge-tech">⚡ REST API V1</span>
                         </div>
-                        <h2 class="section-title" style="color: #ffffff;">Arsitektur REST API Terintegrasi untuk Mobile POS</h2>
-                        <p style="color: #94a3b8; font-size: 1.05rem; margin-bottom: 24px; line-height: 1.6;">
-                            Bangun antarmuka kasir mobile impian Anda menggunakan <strong>React Native</strong> atau <strong>Flutter</strong>. Backend POS kami menyediakan endpoint RESTful yang ringan, terisolasi per tenant, dan dilengkapi mekanisme <em>Offline Sync Queue</em>.
+                        <h2 class="section-title">REST API Terstandarisasi untuk Aplikasi Mobile POS</h2>
+                        <p style="font-size: 1.05rem; margin-bottom: 24px; line-height: 1.65; color: var(--text-body);">
+                            Hubungkan aplikasi kasir mobile buatan Anda menggunakan <strong>React Native</strong> atau <strong>Flutter</strong>. Backend kami menyediakan endpoint RESTful yang ringan, aman, dan dilengkapi mekanisme <em>Offline Sync Queue</em>.
                         </p>
                         <ul class="tab-checklist">
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Autentikasi aman berbasis Bearer API Token</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Autentikasi aman berbasis Bearer Token</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                 <span>Sinkronisasi offline: Kasir tetap aktif saat internet terputus</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Kompatibel dengan POS hardware Android (Sunmi, Pax, iMin)</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Siap digunakan di POS hardware Android (Sunmi, Pax, iMin)</span>
                             </li>
                         </ul>
                     </div>
@@ -430,7 +430,7 @@
         </section>
 
         <!-- ==========================================================================
-           Section: Free Pricing & Google Login
+           Section: Free Pricing & Google Login (Tema Terang Ungu)
            ========================================================================== -->
         <section class="pricing-section" id="harga">
             <div class="container">
@@ -438,7 +438,7 @@
                     <span class="section-tag">Akses Gratis</span>
                     <h2 class="section-title">Mulai Sekarang — 100% Gratis dengan Google</h2>
                     <p class="section-subtitle">
-                        Tanpa formulir panjang, tanpa biaya tersembunyi, dan tanpa perlu memasukkan nomor kartu kredit. Cukup satu klik untuk mengaktifkan sistem POS toko Anda.
+                        Tanpa formulir panjang, tanpa biaya tersembunyi, dan tanpa kartu kredit. Cukup satu klik akun Google untuk mengaktifkan sistem POS toko Anda seketika.
                     </p>
                 </div>
 
@@ -446,30 +446,30 @@
                     <div class="free-ribbon">GRATIS</div>
                     <div class="free-info">
                         <div class="free-price-tag">Rp 0</div>
-                        <div class="free-price-sub">Gratis 1 Tahun untuk Toko & UMKM</div>
+                        <div class="free-price-sub">Gratis Selamanya untuk Toko & Pelaku UMKM</div>
 
                         <ul class="tab-checklist" style="margin-bottom: 0;">
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Akses Penuh Fitur Kasir & Penjualan</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Akses Penuh Fitur Kasir & Transaksi Penjualan</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Manajemen Produk & Varian SKU</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Manajemen Produk, Kategori & Varian SKU</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                 <span>Akses REST API Mobile (React Native & Flutter)</span>
                             </li>
                             <li>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                <span>Manajemen Shift & Laporan Keuangan Harian</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Manajemen Shift Kasir & Laporan Arus Kas</span>
                             </li>
                         </ul>
                     </div>
 
                     <div class="free-cta-box">
-                        <a href="{{ route('auth.google') }}" class="btn-google-primary" style="width: 100%; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.12);" id="pricing-cta-google">
+                        <a href="{{ route('auth.google') }}" class="btn-google-primary" style="width: 100%; justify-content: center;" id="pricing-cta-google">
                             <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
                             <span>Daftar Cepat via Google</span>
                         </a>
@@ -487,7 +487,7 @@
         <section class="faq-section" id="faq">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Pertanyaan Populer</span>
+                    <span class="section-tag">Tanya Jawab</span>
                     <h2 class="section-title">Frequently Asked Questions</h2>
                     <p class="section-subtitle">
                         Segala hal yang perlu Anda ketahui mengenai akses gratis dan penggunaan sistem POS ini.
@@ -502,7 +502,7 @@
                         </button>
                         <div class="faq-answer">
                             <div class="faq-answer-inner">
-                                Ya, benar! Anda cukup mengklik tombol "Masuk dengan Google". Sistem kami akan secara otomatis membuatkan akun Tenant toko gratis Anda lengkap dengan outlet utama, paket lisensi aktif, dan hak akses pemilik tanpa memungut biaya langganan.
+                                Ya, 100% benar! Anda cukup mengklik tombol "Masuk dengan Google". Sistem kami otomatis membuatkan akun Tenant toko gratis Anda lengkap dengan outlet utama, lisensi aktif, dan hak akses pemilik tanpa biaya langganan bulanan.
                             </div>
                         </div>
                     </div>
@@ -514,7 +514,7 @@
                         </button>
                         <div class="faq-answer">
                             <div class="faq-answer-inner">
-                                Sangat mendukung! Backend POS ini dilengkapi dengan REST API V1 standar yang dirancang khusus untuk klien mobile modern, baik yang dikembangkan dengan <strong>React Native</strong> maupun <strong>Flutter</strong>, termasuk dukungan hardware POS Android seperti Sunmi dan Pax.
+                                Sangat mendukung! Backend POS ini dilengkapi dengan REST API V1 standar yang dirancang khusus untuk klien mobile modern, baik yang dikembangkan dengan <strong>React Native</strong> maupun <strong>Flutter</strong>, termasuk dukungan perangkat hardware POS Android seperti Sunmi dan Pax.
                             </div>
                         </div>
                     </div>
@@ -526,7 +526,7 @@
                         </button>
                         <div class="faq-answer">
                             <div class="faq-answer-inner">
-                                Arsitektur REST API V1 kami memiliki endpoint <code>/api/v1/sync/pull</code> dan <code>/api/v1/sync/push</code>. Klien mobile dapat menyimpan antrean transaksi di penyimpanan lokal dan mengunggahnya secara otomatis ketika sinyal internet pulih.
+                                Arsitektur REST API V1 kami memiliki endpoint <code>/api/v1/sync/pull</code> dan <code>/api/v1/sync/push</code>. Klien mobile dapat menyimpan antrean transaksi di penyimpanan lokal dan mengunggahnya secara otomatis saat koneksi internet kembali normal.
                             </div>
                         </div>
                     </div>
@@ -538,7 +538,7 @@
                         </button>
                         <div class="faq-answer">
                             <div class="faq-answer-inner">
-                                Anda dapat menautkan resep (Bill of Materials) pada suatu menu makanan/minuman. Setiap kali kasir menyelesaikan pembayaran untuk produk tersebut, sistem secara otomatis menghitung dan memotong stok bahan baku mentah di gudang outlet secara akurat.
+                                Anda dapat menautkan resep (Bill of Materials) pada menu makanan/minuman. Setiap kali kasir menyelesaikan transaksi untuk produk tersebut, sistem secara otomatis menghitung dan memotong stok bahan baku mentah di gudang outlet secara akurat.
                             </div>
                         </div>
                     </div>
@@ -547,15 +547,15 @@
         </section>
 
         <!-- ==========================================================================
-           Bottom Final CTA
+           Bottom Final CTA (Vibrant Purple Theme)
            ========================================================================== -->
         <section class="cta-bottom-section">
             <div class="container">
-                <h2 class="cta-bottom-title">Siap Meningkatkan Penjualan Toko Anda Hari Ini?</h2>
+                <h2 class="cta-bottom-title">Siap Memajukan Operasional Toko Anda?</h2>
                 <p class="cta-bottom-subtitle">
                     Bergabung sekarang dan nikmati seluruh kemudahan platform POS modern secara cuma-cuma hanya dengan satu klik akun Google Anda.
                 </p>
-                <a href="{{ route('auth.google') }}" class="btn-google-primary" id="bottom-cta-google">
+                <a href="{{ route('auth.google') }}" class="btn-google-primary" id="bottom-cta-google" style="background: #ffffff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.25);">
                     <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
                     <span>Masuk dengan Google (100% Gratis)</span>
                 </a>
@@ -564,12 +564,12 @@
     </main>
 
     <!-- ==========================================================================
-       Footer
+       Footer (Tema Terang)
        ========================================================================== -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
-                <div class="nav-brand" style="color: #ffffff;">
+                <div class="nav-brand">
                     <div class="brand-icon">🛍️</div>
                     <span>POS Aisyah Cloud</span>
                 </div>
@@ -583,7 +583,7 @@
             </div>
             <div class="footer-bottom">
                 <div>&copy; {{ date('Y') }} POS Aisyah SaaS. Solusi Kasir Multi-Tenant & Mobile POS Modern.</div>
-                <div>Dirancang untuk efisiensi retail, resto, kafe, dan franchise.</div>
+                <div>Dirancang untuk efisiensi ritel, resto, kafe, dan franchise.</div>
             </div>
         </div>
     </footer>
