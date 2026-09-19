@@ -161,30 +161,43 @@ class SaasDatabaseSeeder extends Seeder
 
         // 5. Seed Users
         // A. Platform Super Admin
-        $superadmin = User::firstOrCreate(['email' => 'superadmin@pos.id'], [
-            'name'          => 'Platform Super Admin',
-            'username'      => 'superadmin',
-            'phone'         => '08111111111',
-            'password'      => bcrypt('SuperAdmin123'),
-            'pin'           => Hash::make('999999'),
-            'api_token'     => 'superadmin_test_token_' . bin2hex(random_bytes(10)),
-            'is_superadmin' => true,
-            'locale'        => 'id',
-        ]);
+        $superadmin = User::where('username', 'superadmin')->orWhere('email', 'superadmin@pos.id')->first();
+        if (!$superadmin) {
+            $superadmin = new User();
+            $superadmin->username = 'superadmin';
+            $superadmin->email = 'superadmin@pos.id';
+            $superadmin->password = bcrypt('SuperAdmin123');
+        }
+        $superadmin->name = 'Platform Super Admin';
+        $superadmin->phone = '08111111111';
+        $superadmin->pin = Hash::make('999999');
+        if (empty($superadmin->api_token)) {
+            $superadmin->api_token = 'superadmin_test_token_' . bin2hex(random_bytes(10));
+        }
+        $superadmin->is_superadmin = true;
+        $superadmin->locale = 'id';
+        $superadmin->save();
 
         // B. Tenant Owner (Pemilik Toko Aisyah)
         $pemilikRole = Role::where('name', 'pemilik')->first();
-        $owner = User::firstOrCreate(['email' => 'admin@aisyah.com'], [
-            'tenant_id'     => $tenant->id,
-            'name'          => 'Aisyah Owner',
-            'username'      => 'admin',
-            'phone'         => '08123456789',
-            'password'      => bcrypt('AdminAi123'),
-            'pin'           => Hash::make('123456'),
-            'api_token'     => 'owner_aisyah_token_' . bin2hex(random_bytes(10)),
-            'is_superadmin' => false,
-            'locale'        => 'id',
-        ]);
+        $owner = User::where('username', 'admin')->orWhere('email', 'admin@aisyah.com')->first();
+        if (!$owner) {
+            $owner = new User();
+            $owner->username = 'admin';
+            $owner->email = 'admin@aisyah.com';
+            $owner->password = bcrypt('AdminAi123');
+        }
+        $owner->tenant_id = $tenant->id;
+        $owner->name = 'Aisyah Owner';
+        $owner->phone = '08123456789';
+        $owner->pin = Hash::make('123456');
+        if (empty($owner->api_token)) {
+            $owner->api_token = 'owner_aisyah_token_' . bin2hex(random_bytes(10));
+        }
+        $owner->is_superadmin = false;
+        $owner->locale = 'id';
+        $owner->save();
+
         if ($pemilikRole && !$owner->hasRole('pemilik')) {
             $owner->attachRole($pemilikRole);
         }
@@ -195,17 +208,29 @@ class SaasDatabaseSeeder extends Seeder
 
         // C. Cashier (Penjaga Kasir Toko Aisyah)
         $penjagaRole = Role::where('name', 'penjaga')->first();
-        $cashier = User::firstOrCreate(['email' => 'kasir@aisyah.com'], [
-            'tenant_id'     => $tenant->id,
-            'name'          => 'Budi Kasir',
-            'username'      => 'penjaga',
-            'phone'         => '08129876543',
-            'password'      => bcrypt('member123'),
-            'pin'           => Hash::make('112233'),
-            'api_token'     => 'cashier_aisyah_token_' . bin2hex(random_bytes(10)),
-            'is_superadmin' => false,
-            'locale'        => 'id',
-        ]);
+        $cashier = User::where('username', 'penjaga')
+            ->orWhere('email', 'kasir@aisyah.com')
+            ->orWhere('email', 'member@aisyah.com')
+            ->first();
+
+        if (!$cashier) {
+            $cashier = new User();
+            $cashier->username = 'penjaga';
+            $cashier->email = 'kasir@aisyah.com';
+            $cashier->password = bcrypt('member123');
+        }
+        $cashier->tenant_id = $tenant->id;
+        $cashier->name = 'Budi Kasir';
+        $cashier->email = 'kasir@aisyah.com';
+        $cashier->phone = '08129876543';
+        $cashier->pin = Hash::make('112233');
+        if (empty($cashier->api_token)) {
+            $cashier->api_token = 'cashier_aisyah_token_' . bin2hex(random_bytes(10));
+        }
+        $cashier->is_superadmin = false;
+        $cashier->locale = 'id';
+        $cashier->save();
+
         if ($penjagaRole && !$cashier->hasRole('penjaga')) {
             $cashier->attachRole($penjagaRole);
         }
