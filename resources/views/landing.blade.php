@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SaaS POS Multi-Tenant - Aplikasi Kasir Cloud, Resep BOM & Mobile API (Gratis)</title>
     <meta name="description" content="Platform Point of Sale (POS) Multi-Tenant & Multi-Outlet berbasis Cloud. Dilengkapi resep bahan baku (BOM), shift kasir, parkir pesanan, offline sync, dan REST API untuk React Native & Flutter. 100% Gratis cukup Login dengan Google.">
-    <meta name="keywords" content="POS SaaS, Point of Sale Indonesia, Aplikasi Kasir Gratis, Multi Tenant POS, Resep BOM, Kasir Mobile React Native Flutter, POS Multi Cabang, Tema Terang Ungu">
+    <meta name="keywords" content="POS SaaS, Point of Sale Indonesia, Aplikasi Kasir Gratis, Multi Tenant POS, Resep BOM, Kasir Mobile React Native Flutter, POS Multi Cabang, Tema Terang Biru">
     <meta name="author" content="POS Aisyah Cloud">
 
     <!-- Open Graph / Meta Social -->
@@ -58,7 +58,7 @@
 
     <main>
         <!-- ==========================================================================
-           Hero Section (Tema Terang Ungu)
+           Hero Section (Tema Terang Biru)
            ========================================================================== -->
         <section class="hero-section" id="hero">
             <div class="hero-glow"></div>
@@ -430,7 +430,7 @@
         </section>
 
         <!-- ==========================================================================
-           Section: Free Pricing & Google Login (Tema Terang Ungu)
+           Section: Free Pricing & Google Login (Tema Terang Biru)
            ========================================================================== -->
         <section class="pricing-section" id="harga">
             <div class="container">
@@ -547,7 +547,7 @@
         </section>
 
         <!-- ==========================================================================
-           Bottom Final CTA (Vibrant Purple Theme)
+           Bottom Final CTA (Vibrant Blue Theme)
            ========================================================================== -->
         <section class="cta-bottom-section">
             <div class="container">

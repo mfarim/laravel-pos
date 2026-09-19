@@ -1,36 +1,36 @@
 /* ==========================================================================
-   Modern SaaS Landing Page Stylesheet - Light Theme with Purple Palette
+   Modern SaaS Landing Page Stylesheet - Light Theme with Blue Palette
    ========================================================================== */
 :root {
-  --primary: #7c3aed;
-  --primary-hover: #6d28d9;
-  --primary-dark: #4c1d95;
-  --primary-light: #f5f3ff;
-  --primary-subtle: #faf8ff;
-  --purple-border: #ddd6fe;
-  --purple-border-subtle: #ede9fe;
-  --purple-accent: #9333ea;
-  --purple-glow: rgba(124, 58, 237, 0.15);
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-dark: #1e3a8a;
+  --primary-light: #eff6ff;
+  --primary-subtle: #f8faff;
+  --blue-border: #bfdbfe;
+  --blue-border-subtle: #dbeafe;
+  --blue-accent: #0284c7;
+  --blue-glow: rgba(37, 99, 235, 0.15);
 
   --accent-green: #059669;
   --accent-green-light: #ecfdf5;
   --accent-amber: #d97706;
   --accent-amber-light: #fffbeb;
-  --accent-blue: #2563eb;
-  --accent-blue-light: #eff6ff;
+  --accent-cyan: #0891b2;
+  --accent-cyan-light: #ecfeff;
 
   --bg-page: #ffffff;
-  --bg-section-alt: #faf8ff;
+  --bg-section-alt: #f8faff;
   --bg-card: #ffffff;
-  --text-heading: #1e1b4b;
+  --text-heading: #0f172a;
   --text-body: #334155;
   --text-muted: #64748b;
   --text-light-muted: #94a3b8;
 
-  --gradient-purple: linear-gradient(135deg, #6d28d9 0%, #7c3aed 50%, #9333ea 100%);
-  --gradient-text: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 50%, #c026d3 100%);
-  --gradient-hero: radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.12) 0%, rgba(245, 243, 255, 0.02) 70%);
-  --gradient-panel: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+  --gradient-blue: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #0284c7 100%);
+  --gradient-text: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #06b6d4 100%);
+  --gradient-hero: radial-gradient(ellipse at 50% 0%, rgba(37, 99, 235, 0.12) 0%, rgba(239, 246, 255, 0.02) 70%);
+  --gradient-panel: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
 
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -38,10 +38,10 @@
   --radius-xl: 28px;
 
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px -2px rgba(124, 58, 237, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 12px 24px -4px rgba(124, 58, 237, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.03);
-  --shadow-xl: 0 24px 38px -6px rgba(124, 58, 237, 0.14), 0 10px 16px -4px rgba(0, 0, 0, 0.04);
-  --shadow-purple-glow: 0 12px 30px -5px rgba(124, 58, 237, 0.35);
+  --shadow-md: 0 4px 12px -2px rgba(37, 99, 235, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 24px -4px rgba(37, 99, 235, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 24px 38px -6px rgba(37, 99, 235, 0.14), 0 10px 16px -4px rgba(0, 0, 0, 0.04);
+  --shadow-blue-glow: 0 12px 30px -5px rgba(37, 99, 235, 0.35);
 }
 
 *, *::before, *::after {
@@ -82,7 +82,7 @@ ul {
 }
 
 /* ==========================================================================
-   Navigation Bar (Tema Terang)
+   Navigation Bar (Tema Terang Biru)
    ========================================================================== */
 .site-header {
   position: fixed;
@@ -93,7 +93,7 @@ ul {
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--purple-border-subtle);
+  border-bottom: 1px solid var(--blue-border-subtle);
   transition: all 0.3s ease;
 }
 
@@ -118,13 +118,13 @@ ul {
   width: 42px;
   height: 42px;
   border-radius: var(--radius-md);
-  background: var(--gradient-purple);
+  background: var(--gradient-blue);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
   font-size: 1.25rem;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
 }
 
 .brand-badge {
@@ -134,7 +134,7 @@ ul {
   letter-spacing: 0.05em;
   background: var(--primary-light);
   color: var(--primary);
-  border: 1px solid var(--purple-border);
+  border: 1px solid var(--blue-border);
   padding: 3px 10px;
   border-radius: 999px;
   margin-left: 6px;
@@ -169,7 +169,7 @@ ul {
   color: var(--primary-dark);
   font-weight: 700;
   font-size: 0.9rem;
-  border: 1.5px solid var(--purple-border);
+  border: 1.5px solid var(--blue-border);
   background: #ffffff;
   transition: all 0.2s ease;
 }
@@ -191,7 +191,7 @@ ul {
   font-weight: 700;
   font-size: 0.9rem;
   border: none;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
   transition: all 0.2s ease;
   cursor: pointer;
 }
@@ -199,11 +199,11 @@ ul {
 .btn-google-nav:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
 }
 
 /* ==========================================================================
-   Hero Section (Tema Terang dengan Warna Ungu)
+   Hero Section (Tema Terang dengan Warna Biru)
    ========================================================================== */
 .hero-section {
   position: relative;
@@ -243,7 +243,7 @@ ul {
   padding: 7px 18px;
   border-radius: 999px;
   background: var(--primary-light);
-  border: 1px solid var(--purple-border);
+  border: 1px solid var(--blue-border);
   color: var(--primary-dark);
   font-size: 0.88rem;
   font-weight: 700;
@@ -306,8 +306,8 @@ ul {
   color: var(--text-heading);
   font-weight: 800;
   font-size: 1.05rem;
-  border: 2px solid var(--purple-border);
-  box-shadow: 0 10px 25px -4px rgba(124, 58, 237, 0.2);
+  border: 2px solid var(--blue-border);
+  box-shadow: 0 10px 25px -4px rgba(37, 99, 235, 0.2);
   transition: all 0.25s ease;
   cursor: pointer;
 }
@@ -315,7 +315,7 @@ ul {
 .btn-google-primary:hover {
   transform: translateY(-3px) scale(1.01);
   border-color: var(--primary);
-  box-shadow: var(--shadow-purple-glow);
+  box-shadow: var(--shadow-blue-glow);
   background: #ffffff;
 }
 
@@ -330,14 +330,14 @@ ul {
   font-weight: 700;
   font-size: 1.05rem;
   border: 2px solid transparent;
-  box-shadow: 0 8px 20px -3px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 8px 20px -3px rgba(37, 99, 235, 0.35);
   transition: all 0.25s ease;
 }
 
 .btn-demo-secondary:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px -3px rgba(124, 58, 237, 0.45);
+  box-shadow: 0 12px 28px -3px rgba(37, 99, 235, 0.45);
 }
 
 .hero-trust-badges {
@@ -364,7 +364,7 @@ ul {
 }
 
 /* ==========================================================================
-   Hero Preview Window (Light Frame with Purple Accents)
+   Hero Preview Window (Light Frame with Blue Accents)
    ========================================================================== */
 .hero-mockup-wrapper {
   position: relative;
@@ -372,16 +372,16 @@ ul {
   margin-top: 55px;
   border-radius: var(--radius-xl);
   padding: 14px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 243, 255, 0.6) 100%);
-  border: 2px solid var(--purple-border);
-  box-shadow: var(--shadow-xl), 0 0 50px -10px rgba(124, 58, 237, 0.15);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(239, 246, 255, 0.6) 100%);
+  border: 2px solid var(--blue-border);
+  box-shadow: var(--shadow-xl), 0 0 50px -10px rgba(37, 99, 235, 0.15);
 }
 
 .mockup-inner {
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid var(--purple-border-subtle);
+  border: 1px solid var(--blue-border-subtle);
 }
 
 .mockup-header-bar {
@@ -412,7 +412,7 @@ ul {
   margin-left: auto;
   margin-right: auto;
   background: #ffffff;
-  border: 1px solid var(--purple-border);
+  border: 1px solid var(--blue-border);
   padding: 5px 20px;
   border-radius: var(--radius-sm);
   font-size: 0.8rem;
@@ -427,7 +427,7 @@ ul {
   position: relative;
   width: 100%;
   height: 480px;
-  background: #faf8ff;
+  background: #f8faff;
   overflow: hidden;
   display: flex;
 }
@@ -439,17 +439,17 @@ ul {
   object-position: top center;
 }
 
-/* Floating overlay widgets in light theme */
+/* Floating overlay widgets in light blue theme */
 .floating-widget {
   position: absolute;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1.5px solid var(--purple-border);
+  border: 1.5px solid var(--blue-border);
   border-radius: var(--radius-md);
   padding: 16px 22px;
   color: var(--text-heading);
-  box-shadow: 0 16px 32px rgba(124, 58, 237, 0.15);
+  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.15);
   animation: floatSlow 4s ease-in-out infinite alternate;
 }
 
@@ -485,12 +485,12 @@ ul {
 }
 
 /* ==========================================================================
-   Section: Stats Strip (Tema Terang)
+   Section: Stats Strip (Tema Terang Biru)
    ========================================================================== */
 .stats-section {
   background: #ffffff;
-  border-bottom: 1px solid var(--purple-border-subtle);
-  border-top: 1px solid var(--purple-border-subtle);
+  border-bottom: 1px solid var(--blue-border-subtle);
+  border-top: 1px solid var(--blue-border-subtle);
   padding: 55px 0;
 }
 
@@ -541,7 +541,7 @@ ul {
   letter-spacing: 0.08em;
   color: var(--primary);
   background: var(--primary-light);
-  border: 1px solid var(--purple-border);
+  border: 1px solid var(--blue-border);
   padding: 6px 16px;
   border-radius: 999px;
   margin-bottom: 16px;
@@ -572,7 +572,7 @@ ul {
   background: #ffffff;
   border-radius: var(--radius-lg);
   padding: 38px 32px;
-  border: 1.5px solid var(--purple-border-subtle);
+  border: 1.5px solid var(--blue-border-subtle);
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
   position: relative;
@@ -582,12 +582,12 @@ ul {
 .feature-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--purple-border);
+  border-color: var(--blue-border);
 }
 
 .feature-card.highlight {
-  border-color: var(--purple-border);
-  background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+  border-color: var(--blue-border);
+  background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
 }
 
 .feature-icon-box {
@@ -601,7 +601,7 @@ ul {
   margin-bottom: 22px;
   background: var(--primary-light);
   color: var(--primary);
-  border: 1px solid var(--purple-border);
+  border: 1px solid var(--blue-border);
 }
 
 .feature-icon-box.emerald {
@@ -616,10 +616,10 @@ ul {
   border-color: #fde68a;
 }
 
-.feature-icon-box.blue {
-  background: var(--accent-blue-light);
-  color: var(--accent-blue);
-  border-color: #bfdbfe;
+.feature-icon-box.cyan {
+  background: var(--accent-cyan-light);
+  color: var(--accent-cyan);
+  border-color: #a5f3fc;
 }
 
 .feature-card h3 {
@@ -637,12 +637,12 @@ ul {
 }
 
 /* ==========================================================================
-   Section: Interactive Demo Tabs (Tema Terang)
+   Section: Interactive Demo Tabs (Tema Terang Biru)
    ========================================================================== */
 .demo-section {
   padding: 100px 0;
   background: #ffffff;
-  border-top: 1px solid var(--purple-border-subtle);
+  border-top: 1px solid var(--blue-border-subtle);
 }
 
 .tabs-nav {
@@ -656,7 +656,7 @@ ul {
 .tab-btn {
   padding: 13px 26px;
   border-radius: var(--radius-md);
-  border: 1.5px solid var(--purple-border-subtle);
+  border: 1.5px solid var(--blue-border-subtle);
   background: #ffffff;
   color: var(--text-muted);
   font-weight: 700;
@@ -671,14 +671,14 @@ ul {
 .tab-btn:hover {
   background: var(--primary-light);
   color: var(--primary);
-  border-color: var(--purple-border);
+  border-color: var(--blue-border);
 }
 
 .tab-btn.active {
   background: var(--primary);
   color: #ffffff;
   border-color: var(--primary);
-  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
 }
 
 .tab-content-panel {
@@ -687,7 +687,7 @@ ul {
   border-radius: var(--radius-xl);
   padding: 44px;
   color: var(--text-heading);
-  border: 2px solid var(--purple-border);
+  border: 2px solid var(--blue-border);
   box-shadow: var(--shadow-lg);
 }
 
@@ -744,7 +744,7 @@ ul {
   background: #ffffff;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1.5px solid var(--purple-border);
+  border: 1.5px solid var(--blue-border);
   box-shadow: var(--shadow-md);
 }
 
@@ -762,7 +762,7 @@ ul {
   background: var(--bg-section-alt);
   position: relative;
   overflow: hidden;
-  border-top: 1px solid var(--purple-border-subtle);
+  border-top: 1px solid var(--blue-border-subtle);
 }
 
 .api-grid {
@@ -787,22 +787,22 @@ ul {
   font-size: 0.85rem;
   font-weight: 700;
   background: #ffffff;
-  border: 1.5px solid var(--purple-border);
+  border: 1.5px solid var(--blue-border);
   color: var(--primary-dark);
   box-shadow: var(--shadow-sm);
 }
 
 .code-preview-window {
-  background: #1e1b4b;
+  background: #0f172a;
   border-radius: var(--radius-lg);
-  border: 2px solid var(--primary-dark);
+  border: 2px solid #1e3a8a;
   overflow: hidden;
-  box-shadow: 0 20px 40px -10px rgba(76, 29, 149, 0.4);
+  box-shadow: 0 20px 40px -10px rgba(30, 58, 138, 0.4);
 }
 
 .code-header {
   height: 42px;
-  background: #2e1065;
+  background: #1e293b;
   display: flex;
   align-items: center;
   padding: 0 16px;
@@ -812,7 +812,7 @@ ul {
 
 .code-title {
   font-size: 0.78rem;
-  color: #c4b5fd;
+  color: #93c5fd;
   font-family: monospace;
   margin-left: 8px;
   font-weight: 600;
@@ -823,28 +823,28 @@ ul {
   font-family: 'Fira Code', Consolas, Monaco, monospace;
   font-size: 0.88rem;
   line-height: 1.6;
-  color: #f5f3ff;
+  color: #eff6ff;
   overflow-x: auto;
 }
 
-.code-keyword { color: #f472b6; font-weight: bold; }
-.code-func { color: #38bdf8; }
+.code-keyword { color: #38bdf8; font-weight: bold; }
+.code-func { color: #60a5fa; }
 .code-string { color: #34d399; }
-.code-comment { color: #a78bfa; font-style: italic; }
+.code-comment { color: #94a3b8; font-style: italic; }
 
 /* ==========================================================================
-   Section: Free Pricing & Google Login Callout
+   Section: Free Pricing & Google Login Callout (Tema Terang Biru)
    ========================================================================== */
 .pricing-section {
   padding: 100px 0;
   background: #ffffff;
-  border-top: 1px solid var(--purple-border-subtle);
+  border-top: 1px solid var(--blue-border-subtle);
 }
 
 .pricing-card-free {
   max-width: 860px;
   margin: 0 auto;
-  background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
   border-radius: var(--radius-xl);
   border: 2.5px solid var(--primary);
   padding: 55px;
@@ -862,14 +862,14 @@ ul {
   top: 26px;
   right: -36px;
   transform: rotate(45deg);
-  background: var(--gradient-purple);
+  background: var(--gradient-blue);
   color: #ffffff;
   font-weight: 800;
   font-size: 0.75rem;
   padding: 6px 45px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 .free-price-tag {
@@ -891,7 +891,7 @@ ul {
   background: #ffffff;
   border-radius: var(--radius-lg);
   padding: 32px;
-  border: 1.5px solid var(--purple-border);
+  border: 1.5px solid var(--blue-border);
   text-align: center;
   box-shadow: var(--shadow-md);
 }
@@ -904,12 +904,12 @@ ul {
 }
 
 /* ==========================================================================
-   Section: FAQ Accordion
+   Section: FAQ Accordion (Tema Terang Biru)
    ========================================================================== */
 .faq-section {
   padding: 100px 0;
   background: var(--bg-section-alt);
-  border-top: 1px solid var(--purple-border-subtle);
+  border-top: 1px solid var(--blue-border-subtle);
 }
 
 .faq-container {
@@ -918,7 +918,7 @@ ul {
 }
 
 .faq-item {
-  border: 1.5px solid var(--purple-border-subtle);
+  border: 1.5px solid var(--blue-border-subtle);
   border-radius: var(--radius-md);
   margin-bottom: 16px;
   overflow: hidden;
@@ -927,7 +927,7 @@ ul {
 }
 
 .faq-item:hover {
-  border-color: var(--purple-border);
+  border-color: var(--blue-border);
 }
 
 .faq-question {
@@ -960,7 +960,7 @@ ul {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  background: #faf8ff;
+  background: #f8faff;
   color: var(--text-body);
   font-size: 0.98rem;
   line-height: 1.65;
@@ -984,15 +984,15 @@ ul {
 }
 
 /* ==========================================================================
-   Section: Bottom Final CTA (Vibrant Purple Gradient)
+   Section: Bottom Final CTA (Vibrant Blue Gradient)
    ========================================================================== */
 .cta-bottom-section {
-  background: var(--gradient-purple);
+  background: var(--gradient-blue);
   color: #ffffff;
   padding: 95px 0;
   text-align: center;
   position: relative;
-  box-shadow: 0 -10px 30px rgba(124, 58, 237, 0.15);
+  box-shadow: 0 -10px 30px rgba(37, 99, 235, 0.15);
 }
 
 .cta-bottom-title {
@@ -1018,7 +1018,7 @@ ul {
   color: var(--text-muted);
   padding: 65px 0 32px;
   font-size: 0.92rem;
-  border-top: 1px solid var(--purple-border-subtle);
+  border-top: 1px solid var(--blue-border-subtle);
 }
 
 .footer-top {
@@ -1026,7 +1026,7 @@ ul {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 40px;
-  border-bottom: 1px solid var(--purple-border-subtle);
+  border-bottom: 1px solid var(--blue-border-subtle);
   flex-wrap: wrap;
   gap: 20px;
 }
