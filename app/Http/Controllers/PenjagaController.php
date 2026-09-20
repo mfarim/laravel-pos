@@ -335,16 +335,22 @@ class PenjagaController extends Controller
         }
         public function hapuspenjaga(Request $request, $id){
           $user = $request->user();
-          User::destroy($id);
-          Session::flash("notif", [
-            "level"=>"info",
-            "message"=>"Data Penjaga berhasil dihapus"
-            ]);
-            if ($user->hasRole('pemilik')) {
-                return redirect()->route('datapenjaga');
-            } else {
-                //return buat pemilik
-            }
+          $target = User::where('id', $id)->first();
+          if ($target && !$target->isSuperAdmin() && ($user->isSuperAdmin() || $target->tenant_id === $user->tenant_id)) {
+              $target->delete();
+              Session::flash("notif", [
+                  "level"=>"info",
+                  "message"=>"Data Penjaga berhasil dihapus"
+              ]);
+          } else {
+              Session::flash("notif", [
+                  "level"=>"danger",
+                  "message"=>"Akses ditolak atau data tidak ditemukan."
+              ]);
+          }
+          if ($user->hasRole('pemilik')) {
+              return redirect()->route('datapenjaga');
+          }
         }
 
         public function simpanpenjaga(Request $request){
@@ -358,9 +364,10 @@ class PenjagaController extends Controller
               $posts = User::create(['name'=> $request->name,
                                     'username'=>$request->username,
                                     'email'=>$request->email,
+                                    'tenant_id'=>$user->tenant_id,
                                     'password'=>bcrypt($request->password)]);
-                                    $memberRole = Role::where('name', 'penjaga')->first();
-                                    $posts->attachRole($memberRole);
+              $memberRole = Role::where('name', 'penjaga')->first();
+              $posts->attachRole($memberRole);
                                     // dd($posts);
 
               Session::flash("notif", [

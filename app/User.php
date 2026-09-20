@@ -23,7 +23,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'uuid', 'name', 'username', 'email', 'phone', 'password',
-        'tenant_id', 'pin', 'api_token', 'is_superadmin', 'locale',
+        'tenant_id', 'pin', 'api_token', 'locale',
         'google_id', 'avatar',
     ];
 

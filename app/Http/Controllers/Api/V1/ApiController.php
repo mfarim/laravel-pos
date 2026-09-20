@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Outlet;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
@@ -48,5 +51,49 @@ class ApiController extends Controller
         }
 
         return response()->json($response, $code);
+    }
+
+    /**
+     * Resolve and verify that the authenticated user is authorized for the requested outlet.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return int|null
+     *
+     * @throws \Illuminate\Http\Exceptions\HttpResponseException
+     */
+    protected function resolveAuthorizedOutletId(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return null;
+        }
+
+        $rawOutlet = $request->header('X-Outlet-Id')
+            ?: ($request->input('outlet_id') ?: $request->input('current_outlet_id'));
+
+        if ($rawOutlet) {
+            $outlet = Outlet::where(function ($q) use ($rawOutlet) {
+                $q->where('id', $rawOutlet)->orWhere('uuid', $rawOutlet);
+            })->first();
+
+            if (!$outlet) {
+                abort(response()->json([
+                    'status'  => 'error',
+                    'message' => 'Outlet tidak ditemukan.',
+                ], 404));
+            }
+
+            if (!$user->isSuperAdmin() && !$user->hasOutlet($outlet->id)) {
+                abort(response()->json([
+                    'status'  => 'error',
+                    'message' => 'Akses ditolak: Anda tidak memiliki penugasan otorisasi pada outlet/cabang ini.',
+                ], 403));
+            }
+
+            return $outlet->id;
+        }
+
+        $defaultOutlet = $user->defaultOutlet();
+        return $defaultOutlet ? $defaultOutlet->id : null;
     }
 }

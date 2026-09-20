@@ -43,9 +43,12 @@ class TenantScope implements Scope
      */
     public static function resolveCurrentTenantId()
     {
-        // 1. From request attribute (set by EnsureTenantScope middleware)
-        if (app()->bound('request') && request()->has('current_tenant_id')) {
-            return request()->get('current_tenant_id');
+        // 1. From internal request attribute (set strictly by EnsureTenantScope middleware, never public input params)
+        if (app()->bound('request')) {
+            $req = request();
+            if ($req->attributes && $req->attributes->has('current_tenant_id')) {
+                return $req->attributes->get('current_tenant_id');
+            }
         }
 
         // 2. From authenticated user
