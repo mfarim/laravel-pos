@@ -22,8 +22,55 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+
+    <!-- Zero-FOUC Session Guard for Entrance Preloader -->
+    <script>
+        try {
+            if (window.location.search.indexOf('preview_preloader=1') !== -1 || window.location.search.indexOf('reset=1') !== -1) {
+                sessionStorage.removeItem('app_has_visited');
+            } else if (sessionStorage.getItem('app_has_visited')) {
+                document.documentElement.classList.add('has-visited');
+            }
+        } catch(e) {}
+    </script>
 </head>
-<body>
+<body class="preloader-active">
+
+    <!-- ==========================================================================
+       Entrance Preloader Overlay (PA POS AISYAH - FLIP Coordinate Snapping)
+       ========================================================================== -->
+    <div class="splash-overlay" id="splash-overlay" aria-label="Loading application" role="dialog" aria-modal="true">
+        <div class="splash-stage phase-intro" id="splash-stage">
+            <div class="splash-brand-logo">
+                <div class="splash-monogram-pa">
+                    <svg class="splash-pa-svg" viewBox="0 0 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="splash-path-p" d="M 0 10 L 10 0 H 32 C 41 0 46 5 46 14 V 34 C 46 43 41 48 32 48 H 16 V 80 H 0 Z M 16 16 H 28 C 31 16 32 17 32 20 V 28 C 32 31 31 32 28 32 H 16 Z" fill-rule="evenodd" />
+                        <path class="splash-path-a" d="M 66 8 L 74 0 H 88 L 96 8 L 108 80 H 92 L 86 48 H 76 L 70 80 H 54 Z M 78 18 H 84 L 88 36 H 74 Z" fill-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="splash-text-stacked" id="splash-text-stacked">
+                    <div class="splash-text-line line-pos">
+                        <span class="stagger-char" style="--char-index: 0;">P</span>
+                        <span class="stagger-char" style="--char-index: 1;">O</span>
+                        <span class="stagger-char" style="--char-index: 2;">S</span>
+                    </div>
+                    <div class="splash-text-line line-aisyah">
+                        <span class="stagger-char" style="--char-index: 3;">A</span>
+                        <span class="stagger-char" style="--char-index: 4;">I</span>
+                        <span class="stagger-char" style="--char-index: 5;">S</span>
+                        <span class="stagger-char" style="--char-index: 6;">Y</span>
+                        <span class="stagger-char" style="--char-index: 7;">A</span>
+                        <span class="stagger-char" style="--char-index: 8;">H</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instant Skip Pill -->
+        <div class="splash-skip-pill" id="splash-skip-btn" role="button" tabindex="0" title="Skip animation">
+            <span data-i18n="splash_skip">Click anywhere or press <strong>ESC</strong> to skip</span>
+        </div>
+    </div>
 
     <!-- ==========================================================================
        Header / Navbar (Tema Terang Biru dengan Language Selector)
@@ -32,8 +79,18 @@
         <div class="container">
             <nav class="nav-wrap" aria-label="Main Navigation">
                 <a href="{{ url('/') }}" class="nav-brand" id="brand-logo-link">
-                    <div class="brand-icon">🛍️</div>
-                    <span>POS Aisyah</span>
+                    <div class="navbar-brand-logo" id="navbar-brand-logo">
+                        <div class="brand-monogram-pa">
+                            <svg class="pa-monogram-svg" viewBox="0 0 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 0 10 L 10 0 H 32 C 41 0 46 5 46 14 V 34 C 46 43 41 48 32 48 H 16 V 80 H 0 Z M 16 16 H 28 C 31 16 32 17 32 20 V 28 C 32 31 31 32 28 32 H 16 Z" fill="#009fe3" fill-rule="evenodd"/>
+                                <path d="M 66 8 L 74 0 H 88 L 96 8 L 108 80 H 92 L 86 48 H 76 L 70 80 H 54 Z M 78 18 H 84 L 88 36 H 74 Z" fill="#009fe3" fill-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="brand-text-stacked">
+                            <span class="brand-text-line">POS</span>
+                            <span class="brand-text-line">AISYAH</span>
+                        </div>
+                    </div>
                     <span class="brand-badge" data-i18n="nav_badge">SaaS Cloud</span>
                 </a>
 
@@ -587,8 +644,16 @@
         <div class="container">
             <div class="footer-top">
                 <div class="nav-brand">
-                    <div class="brand-icon">🛍️</div>
-                    <span>POS Aisyah Cloud</span>
+                    <div class="brand-monogram-pa">
+                        <svg class="pa-monogram-svg" viewBox="0 0 110 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 0 10 L 10 0 H 32 C 41 0 46 5 46 14 V 34 C 46 43 41 48 32 48 H 16 V 80 H 0 Z M 16 16 H 28 C 31 16 32 17 32 20 V 28 C 32 31 31 32 28 32 H 16 Z" fill="#009fe3" fill-rule="evenodd"/>
+                            <path d="M 66 8 L 74 0 H 88 L 96 8 L 108 80 H 92 L 86 48 H 76 L 70 80 H 54 Z M 78 18 H 84 L 88 36 H 74 Z" fill="#009fe3" fill-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="brand-text-stacked">
+                        <span class="brand-text-line">POS</span>
+                        <span class="brand-text-line">AISYAH <span style="font-weight: 500; font-size: 0.8rem; opacity: 0.85;">CLOUD</span></span>
+                    </div>
                 </div>
                 <div class="footer-links">
                     <a href="#fitur" data-i18n="nav_features">Features</a>
@@ -619,6 +684,7 @@
                 nav_faq: "FAQ",
                 btn_login: "Cashier Login",
                 btn_google_nav: "Sign in with Google",
+                splash_skip: "Click anywhere or press <strong>ESC</strong> to skip",
 
                 hero_pill_tag: "100% FREE",
                 hero_pill_text: "Sign in with Google • Instant Setup with Zero Credit Card Required",
@@ -845,6 +911,7 @@
                 bottom_cta_title: "Siap Memajukan Operasional Toko Anda?",
                 bottom_cta_subtitle: "Bergabung sekarang dan nikmati seluruh kemudahan platform POS modern secara cuma-cuma hanya dengan satu klik akun Google Anda.",
                 btn_bottom_google: "Masuk dengan Google (100% Gratis)",
+                splash_skip: "Klik di mana saja atau tekan <strong>ESC</strong> untuk lewati",
 
                 footer_copy: "&copy; " + new Date().getFullYear() + " POS Aisyah SaaS. Solusi Kasir Multi-Tenant &amp; Mobile POS Modern.",
                 footer_sub: "Dirancang untuk efisiensi ritel, resto, kafe, dan franchise."
@@ -975,6 +1042,133 @@
                 });
             }
         });
+
+        // ==========================================================================
+        // Entrance Preloader FLIP & Coordinate Snapping Orchestration
+        // ==========================================================================
+        (function () {
+            // Check if user has already visited in this browser session (Zero-FOUC fast bypass)
+            try {
+                if (window.location.search.indexOf('preview_preloader=1') === -1 && window.location.search.indexOf('reset=1') === -1) {
+                    if (sessionStorage.getItem('app_has_visited')) {
+                        document.documentElement.classList.add('has-visited');
+                        document.body.classList.remove('preloader-active');
+                        var fastOverlay = document.getElementById('splash-overlay');
+                        if (fastOverlay && fastOverlay.parentNode) {
+                            fastOverlay.parentNode.removeChild(fastOverlay);
+                        }
+                        return;
+                    }
+                }
+            } catch (e) {}
+
+            var overlay = document.getElementById('splash-overlay');
+            var stage = document.getElementById('splash-stage');
+            var navLogo = document.querySelector('.navbar-brand-logo');
+            var skipBtn = document.getElementById('splash-skip-btn');
+
+            if (!overlay || !stage || !navLogo) return;
+
+            var isFinished = false;
+            var timerIds = [];
+
+            function finishPreloader(instant) {
+                if (isFinished) return;
+                isFinished = true;
+
+                // Clear any pending phase timers
+                timerIds.forEach(function (id) { clearTimeout(id); });
+
+                try {
+                    sessionStorage.setItem('app_has_visited', 'true');
+                } catch (e) {}
+
+                document.documentElement.classList.add('has-visited');
+                document.body.classList.remove('preloader-active');
+
+                cleanup();
+
+                if (instant) {
+                    overlay.style.transition = 'opacity 200ms ease';
+                    overlay.style.opacity = '0';
+                    setTimeout(function () {
+                        if (overlay && overlay.parentNode) {
+                            overlay.parentNode.removeChild(overlay);
+                        }
+                    }, 200);
+                } else {
+                    if (overlay && overlay.parentNode) {
+                        overlay.parentNode.removeChild(overlay);
+                    }
+                }
+            }
+
+            function handleKeydown(e) {
+                if (e.key === 'Escape' || e.keyCode === 27) {
+                    finishPreloader(true);
+                }
+            }
+
+            function handleOverlayClick(e) {
+                // Click anywhere on overlay triggers instant skip
+                finishPreloader(true);
+            }
+
+            function cleanup() {
+                document.removeEventListener('keydown', handleKeydown);
+                overlay.removeEventListener('click', handleOverlayClick);
+            }
+
+            document.addEventListener('keydown', handleKeydown);
+            overlay.addEventListener('click', handleOverlayClick);
+            if (skipBtn) {
+                skipBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    finishPreloader(true);
+                });
+            }
+
+            // Timeline Orchestration:
+            // Fase 1 (Intro - 0.0s s/d 1.0s): SVG Monogram Stroke animation is active via .phase-intro
+            stage.classList.add('phase-intro');
+
+            // Fase 2 (Reveal - 1.0s s/d 1.8s): Staggered character reveal
+            timerIds.push(setTimeout(function () {
+                if (isFinished) return;
+                stage.classList.add('phase-reveal');
+            }, 1000));
+
+            // Fase 3 (Glow - 1.8s s/d 2.15s): Monogram badge color fill & ambient glow stabilization
+            timerIds.push(setTimeout(function () {
+                if (isFinished) return;
+                stage.classList.add('phase-glow');
+            }, 1800));
+
+            // Fase 4 (Fly to Navbar - 2.15s s/d 2.85s): Dynamic coordinate flight via FLIP
+            timerIds.push(setTimeout(function () {
+                if (isFinished) return;
+
+                // Dynamic coordinate math from live DOM bounding rects
+                var stageRect = stage.getBoundingClientRect();
+                var navRect = navLogo.getBoundingClientRect();
+
+                var deltaX = navRect.left - stageRect.left;
+                var deltaY = navRect.top - stageRect.top;
+                var targetScale = navRect.height / stageRect.height;
+
+                stage.style.transformOrigin = 'top left';
+                stage.style.transition = 'transform 700ms cubic-bezier(0.16, 1, 0.3, 1)';
+                stage.style.transform = 'translate3d(' + deltaX + 'px, ' + deltaY + 'px, 0) scale(' + targetScale + ')';
+
+                overlay.classList.add('phase-fade');
+            }, 2150));
+
+            // Fase 5 (Handoff - 2.85s): Unmount splash overlay and reveal navbar logo seamlessly
+            timerIds.push(setTimeout(function () {
+                if (isFinished) return;
+                finishPreloader(false);
+            }, 2850));
+        })();
     </script>
 </body>
 </html>

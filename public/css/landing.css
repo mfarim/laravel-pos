@@ -82,6 +82,262 @@ ul {
 }
 
 /* ==========================================================================
+   Entrance Preloader Animation & Navbar Synchronization (PA POS AISYAH)
+   ========================================================================== */
+
+/* State classes */
+body.preloader-active {
+  overflow: hidden !important;
+}
+
+body.preloader-active .navbar-brand-logo {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.navbar-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: opacity 300ms ease, visibility 300ms ease;
+  line-height: 1;
+}
+
+/* Zero-FOUC override: once visited, immediately bypass preloader */
+html.has-visited .splash-overlay {
+  display: none !important;
+}
+
+html.has-visited body.preloader-active .navbar-brand-logo {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Navbar Brand PA + Stacked text */
+.brand-monogram-pa {
+  width: 48px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-monogram-pa .pa-monogram-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.brand-text-stacked {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1;
+}
+
+.brand-text-stacked .brand-text-line {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #009fe3;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+/* Fullscreen Splash Overlay */
+.splash-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color 700ms cubic-bezier(0.16, 1, 0.3, 1), opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.splash-overlay.phase-fade {
+  background-color: transparent !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.splash-stage {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 16px;
+  border-radius: 16px;
+  will-change: transform, opacity;
+  transform-origin: top left;
+}
+
+.splash-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Splash Monogram PA */
+.splash-monogram-pa {
+  width: 96px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: filter 0.35s ease;
+}
+
+.splash-pa-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* SVG Stroke & Dashoffset Setup */
+.splash-pa-svg .splash-path-p,
+.splash-pa-svg .splash-path-a {
+  stroke: #009fe3;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: transparent;
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360;
+  transition: fill 0.35s ease, stroke 0.35s ease;
+}
+
+/* Fase 1: Intro (0.0s - 1.0s) - Draw Stroke */
+.splash-stage.phase-intro .splash-path-p {
+  animation: drawStroke 0.85s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.splash-stage.phase-intro .splash-path-a {
+  animation: drawStroke 0.85s cubic-bezier(0.65, 0, 0.35, 1) 0.12s forwards;
+}
+
+@keyframes drawStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Fase 2: Stagger Text Reveal (1.0s - 1.8s) */
+.splash-text-stacked {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1;
+}
+
+.splash-text-line {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.95rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #009fe3;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.splash-text-line .stagger-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(14px) scale(0.92);
+  filter: blur(4px);
+  will-change: transform, opacity, filter;
+}
+
+.splash-stage.phase-reveal .stagger-char {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--char-index) * 0.055s);
+}
+
+/* Fase 3: Glow & Color Stabilization (1.8s - 2.15s) */
+.splash-stage.phase-glow .splash-path-p,
+.splash-stage.phase-glow .splash-path-a {
+  fill: #009fe3;
+  stroke: #009fe3;
+}
+
+.splash-stage.phase-glow .splash-monogram-pa {
+  filter: drop-shadow(0 0 24px rgba(0, 159, 227, 0.45));
+}
+
+.splash-stage.phase-glow .splash-text-stacked {
+  filter: drop-shadow(0 0 16px rgba(0, 159, 227, 0.3));
+}
+
+/* Skip Pill (Bottom of preloader) */
+.splash-skip-pill {
+  position: absolute;
+  bottom: 36px;
+  padding: 8px 18px;
+  background: rgba(241, 245, 249, 0.85);
+  border: 1px solid var(--blue-border-subtle);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.splash-skip-pill strong {
+  color: #009fe3;
+  font-weight: 700;
+}
+
+.splash-skip-pill:hover {
+  background: #ffffff;
+  color: #009fe3;
+  border-color: #009fe3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 159, 227, 0.15);
+}
+
+/* Responsive adjustments for preloader stage */
+@media (max-width: 640px) {
+  .splash-stage,
+  .splash-brand-logo {
+    gap: 14px;
+  }
+  .splash-monogram-pa {
+    width: 68px;
+    height: 50px;
+  }
+  .splash-text-line {
+    font-size: 1.45rem;
+  }
+  .splash-skip-pill {
+    bottom: 24px;
+    font-size: 0.78rem;
+    padding: 6px 14px;
+  }
+}
+
+/* ==========================================================================
    Navigation Bar (Tema Terang Biru)
    ========================================================================== */
 .site-header {
@@ -108,10 +364,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-weight: 800;
-  font-size: 1.25rem;
   color: var(--text-heading);
-  letter-spacing: -0.02em;
 }
 
 .brand-icon {
@@ -123,8 +376,33 @@ ul {
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  font-size: 1.25rem;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  flex-shrink: 0;
+}
+
+.brand-icon.pa-brand-icon {
+  padding: 7px;
+}
+
+.pa-monogram-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.brand-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.brand-title-accent {
+  color: var(--primary);
 }
 
 .brand-badge {
