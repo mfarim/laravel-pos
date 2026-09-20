@@ -48,8 +48,8 @@ class EnsureTenantScope
             abort(403, 'Akun Anda belum terasosiasi dengan tenant/merchant.');
         }
 
-        // Store tenant ID in request for easy resolution in controllers and queries
-        $request->merge(['current_tenant_id' => $tenantId]);
+        // Store tenant ID in internal request attributes (not in public input parameters)
+        $request->attributes->set('current_tenant_id', $tenantId);
 
         // Share current tenant to all Blade views
         if (function_exists('view')) {

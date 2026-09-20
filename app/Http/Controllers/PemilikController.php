@@ -78,10 +78,13 @@ class PemilikController extends Controller
         {
             $user = $request->user();
             if ($user->hasRole('pemilik')) {
-                $penjaga = User::find($id);
+                $penjaga = User::where('id', $id)
+                    ->where(function ($q) use ($user) {
+                        if (!$user->isSuperAdmin()) {
+                            $q->where('tenant_id', $user->tenant_id);
+                        }
+                    })->firstOrFail();
                 return view('penjaga.ubah',['penjaga'=>$penjaga]);
-            } else {
-                # code...
             }
         }
 
@@ -90,7 +93,12 @@ class PemilikController extends Controller
           if ($user->hasRole('penjaga') || $user->hasRole('pemilik')) {
             if($user->hasRole('pemilik')){
               if ($request->ajax()) {
-                  $penjaga = User::select(['id','name','username','email']);
+                  $penjaga = User::select(['id','name','username','email'])
+                      ->where(function ($q) use ($user) {
+                          if (!$user->isSuperAdmin()) {
+                              $q->where('tenant_id', $user->tenant_id);
+                          }
+                      });
                   return DataTables::of($penjaga)
                   ->addColumn('action', function ($penjaga) {
                       return view('datatable._penjagaTb', [

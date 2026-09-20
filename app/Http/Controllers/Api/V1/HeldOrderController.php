@@ -20,7 +20,7 @@ class HeldOrderController extends ApiController
      */
     public function index(Request $request)
     {
-        $outletId = $this->resolveOutletId($request);
+        $outletId = $this->resolveAuthorizedOutletId($request);
         $query = HeldOrder::latest('id');
 
         if ($outletId) {
@@ -51,7 +51,7 @@ class HeldOrderController extends ApiController
             return $this->errorResponse('Validasi gagal', 422, $validator->errors());
         }
 
-        $outletId = $this->resolveOutletId($request);
+        $outletId = $this->resolveAuthorizedOutletId($request);
         $session = PosSession::where('outlet_id', $outletId)->where('status', 'open')->latest('id')->first();
         $user = Auth::user();
 
@@ -92,6 +92,11 @@ class HeldOrderController extends ApiController
             return $this->errorResponse('Pesanan ditahan tidak ditemukan', 404);
         }
 
+        $user = Auth::user();
+        if ($user && !$user->isSuperAdmin() && !$user->hasOutlet($heldOrder->outlet_id)) {
+            return $this->errorResponse('Akses terhadap pesanan cabang ini ditolak.', 403);
+        }
+
         $heldOrder->delete();
 
         return $this->successResponse(null, 'Pesanan ditahan berhasil dihapus/dipanggil');
@@ -99,16 +104,6 @@ class HeldOrderController extends ApiController
 
     protected function resolveOutletId(Request $request)
     {
-        if ($request->has('current_outlet_id')) {
-            return $request->get('current_outlet_id');
-        }
-        if ($request->has('outlet_id')) {
-            $val = $request->input('outlet_id');
-            $outlet = Outlet::where('id', $val)->orWhere('uuid', $val)->first();
-            return $outlet ? $outlet->id : null;
-        }
-        $user = Auth::user();
-        $defaultOutlet = $user ? $user->defaultOutlet() : null;
-        return $defaultOutlet ? $defaultOutlet->id : null;
+        return $this->resolveAuthorizedOutletId($request);
     }
 }

@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 
 Route::prefix('v1')->namespace('Api\V1')->group(function () {
 
-    // 1. Public Authentication Endpoints
-    Route::post('auth/login', 'AuthController@login');
-    Route::post('auth/pin-login', 'AuthController@pinLogin');
+    // 1. Public Authentication Endpoints (Rate Limited)
+    Route::post('auth/login', 'AuthController@login')->middleware('throttle:10,1');
+    Route::post('auth/pin-login', 'AuthController@pinLogin')->middleware('throttle:5,1');
 
     // 2. Authenticated Endpoints (Bearer Token + Tenant Scope)
     Route::middleware(['auth.api_token', 'tenant.scope'])->group(function () {

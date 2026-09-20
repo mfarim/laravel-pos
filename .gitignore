@@ -4,8 +4,6 @@
 Homestead.yaml
 Homestead.json
 .env
-/docs
 /public/landing.html
 /public/index.html
 /router.php
-/docs
