@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\AuthorizationLog;
 use App\InventoryItem;
 use App\InventoryStock;
 use App\Outlet;
@@ -30,24 +31,33 @@ class TransactionController extends ApiController
     public function calculate(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'items'             => 'required|array|min:1',
-            'items.*.quantity'  => 'required|numeric|min:0.01',
-            'items.*.unit_price'=> 'required|numeric|min:0',
-            'discount_amount'   => 'nullable|numeric|min:0',
+            'items'                 => 'required|array|min:1',
+            'items.*.product_id'    => 'required',
+            'items.*.quantity'      => 'required|numeric|min:0.01',
+            'discount_amount'       => 'nullable|numeric|min:0',
         ]);
 
         if ($validator->fails()) {
             return $this->errorResponse('Validasi gagal', 422, $validator->errors());
         }
 
-        $outletId = $this->resolveOutletId($request);
+        $outletId = $this->resolveAuthorizedOutletId($request);
         $outlet = $outletId ? Outlet::find($outletId) : null;
         $taxRate = $outlet ? $outlet->effective_tax_rate : 11.00;
 
         $subtotal = 0;
         foreach ($request->input('items') as $item) {
             $qty = (float) $item['quantity'];
-            $price = (float) $item['unit_price'];
+            $productId = isset($item['product_id']) ? $item['product_id'] : null;
+            $product = $productId ? Product::find($productId) : null;
+            $variantId = isset($item['variant_id']) ? $item['variant_id'] : null;
+            $variant = ($variantId && $product) ? ProductVariant::where('id', $variantId)->where('product_id', $product->id)->first() : null;
+
+            $price = $product ? (float) $product->base_price : (isset($item['unit_price']) ? (float) $item['unit_price'] : 0);
+            if ($variant) {
+                $price += (float) $variant->price_adjustment;
+            }
+
             $itemDiscount = isset($item['discount_amount']) ? (float) $item['discount_amount'] : 0;
             $subtotal += ($qty * $price) - $itemDiscount;
         }
@@ -75,22 +85,22 @@ class TransactionController extends ApiController
     public function checkout(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'items'                      => 'required|array|min:1',
-            'items.*.product_id'         => 'required',
-            'items.*.quantity'           => 'required|numeric|min:0.01',
-            'items.*.unit_price'         => 'required|numeric|min:0',
-            'payments'                   => 'required|array|min:1',
+            'items'                        => 'required|array|min:1',
+            'items.*.product_id'           => 'required',
+            'items.*.quantity'             => 'required|numeric|min:0.01',
+            'items.*.unit_price'           => 'nullable|numeric|min:0',
+            'payments'                     => 'required|array|min:1',
             'payments.*.payment_method_id' => 'required',
-            'payments.*.amount'          => 'required|numeric|min:0.01',
-            'customer_name'              => 'nullable|string',
-            'notes'                      => 'nullable|string',
+            'payments.*.amount'            => 'required|numeric|min:0.01',
+            'customer_name'                => 'nullable|string',
+            'notes'                        => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
             return $this->errorResponse('Validasi data checkout gagal', 422, $validator->errors());
         }
 
-        $outletId = $this->resolveOutletId($request);
+        $outletId = $this->resolveAuthorizedOutletId($request);
         if (!$outletId) {
             return $this->errorResponse('Outlet ID diperlukan', 400);
         }
@@ -110,13 +120,53 @@ class TransactionController extends ApiController
         $itemsData = $request->input('items');
         $paymentsData = $request->input('payments');
 
-        // Calculate totals
+        // Calculate totals with authoritative server prices from database
         $subtotal = 0;
+        $processedItems = [];
+
         foreach ($itemsData as $item) {
+            $product = Product::find($item['product_id']);
+            if (!$product) {
+                return $this->errorResponse(sprintf('Produk dengan ID %s tidak ditemukan.', $item['product_id']), 404);
+            }
+
+            $variantId = isset($item['variant_id']) ? $item['variant_id'] : null;
+            $variant = null;
+            if ($variantId) {
+                $variant = ProductVariant::where('id', $variantId)
+                    ->where('product_id', $product->id)
+                    ->first();
+                if (!$variant) {
+                    return $this->errorResponse(sprintf('Varian produk tidak valid untuk produk %s.', $product->name), 422);
+                }
+            }
+
             $qty = (float) $item['quantity'];
-            $price = (float) $item['unit_price'];
+            $unitPrice = (float) $product->base_price + ($variant ? (float) $variant->price_adjustment : 0);
+            $costPrice = (float) $product->cost_price;
             $itemDiscount = isset($item['discount_amount']) ? (float) $item['discount_amount'] : 0;
-            $subtotal += ($qty * $price) - $itemDiscount;
+            $lineSubtotal = ($qty * $unitPrice) - $itemDiscount;
+            $subtotal += $lineSubtotal;
+
+            $itemName = $product->name;
+            if ($variant) {
+                $itemName .= ' (' . $variant->name . ')';
+            }
+
+            $processedItems[] = [
+                'product'            => $product,
+                'variant'            => $variant,
+                'item_name'          => $itemName,
+                'item_sku'           => $product->sku,
+                'inventory_item_id'  => $product->inventory_item_id,
+                'track_stock'        => (bool) $product->track_stock,
+                'quantity'           => $qty,
+                'unit_price'         => $unitPrice,
+                'cost_price'         => $costPrice,
+                'discount_amount'    => $itemDiscount,
+                'subtotal'           => $lineSubtotal,
+                'notes'              => isset($item['notes']) ? $item['notes'] : null,
+            ];
         }
 
         $orderDiscount = (float) $request->input('discount_amount', 0);
@@ -144,7 +194,7 @@ class TransactionController extends ApiController
         $transaction = null;
 
         DB::transaction(function () use (
-            &$transaction, $user, $outlet, $session, $trxNumber, $itemsData,
+            &$transaction, $user, $outlet, $session, $trxNumber, $processedItems,
             $paymentsData, $subtotal, $orderDiscount, $taxAmount, $grandTotal,
             $totalPayment, $changeAmount, $taxRate, $request
         ) {
@@ -171,40 +221,25 @@ class TransactionController extends ApiController
             ]);
 
             // Save line items and deduct stock
-            foreach ($itemsData as $item) {
-                $product = Product::find($item['product_id']);
-                $variantId = isset($item['variant_id']) ? $item['variant_id'] : null;
-                $variant = $variantId ? ProductVariant::find($variantId) : null;
-
-                $itemName = $product ? $product->name : 'Item';
-                if ($variant) {
-                    $itemName .= ' (' . $variant->name . ')';
-                }
-
-                $qty = (float) $item['quantity'];
-                $unitPrice = (float) $item['unit_price'];
-                $costPrice = $product ? (float) $product->cost_price : 0;
-                $itemDiscount = isset($item['discount_amount']) ? (float) $item['discount_amount'] : 0;
-                $lineSubtotal = ($qty * $unitPrice) - $itemDiscount;
-
+            foreach ($processedItems as $pItem) {
                 TransactionItem::create([
                     'transaction_id'     => $transaction->id,
-                    'product_id'         => $product ? $product->id : null,
-                    'product_variant_id' => $variant ? $variant->id : null,
-                    'inventory_item_id'  => $product ? $product->inventory_item_id : null,
-                    'item_name'          => $itemName,
-                    'item_sku'           => $product ? $product->sku : null,
-                    'quantity'           => $qty,
-                    'unit_price'         => $unitPrice,
-                    'cost_price'         => $costPrice,
-                    'discount_amount'    => $itemDiscount,
-                    'subtotal'           => $lineSubtotal,
-                    'notes'              => isset($item['notes']) ? $item['notes'] : null,
+                    'product_id'         => $pItem['product']->id,
+                    'product_variant_id' => $pItem['variant'] ? $pItem['variant']->id : null,
+                    'inventory_item_id'  => $pItem['inventory_item_id'],
+                    'item_name'          => $pItem['item_name'],
+                    'item_sku'           => $pItem['item_sku'],
+                    'quantity'           => $pItem['quantity'],
+                    'unit_price'         => $pItem['unit_price'],
+                    'cost_price'         => $pItem['cost_price'],
+                    'discount_amount'    => $pItem['discount_amount'],
+                    'subtotal'           => $pItem['subtotal'],
+                    'notes'              => $pItem['notes'],
                 ]);
 
                 // Deduct stock if product tracks stock
-                if ($product && $product->track_stock && $product->inventory_item_id) {
-                    $this->deductStock($product->inventory_item_id, $outlet->id, $qty, $transaction, $user->id);
+                if ($pItem['track_stock'] && $pItem['inventory_item_id']) {
+                    $this->deductStock($pItem['inventory_item_id'], $outlet->id, $pItem['quantity'], $transaction, $user->id);
                 }
             }
 
@@ -232,7 +267,7 @@ class TransactionController extends ApiController
      */
     public function index(Request $request)
     {
-        $outletId = $this->resolveOutletId($request);
+        $outletId = $this->resolveAuthorizedOutletId($request);
         $query = Transaction::where('status', 'completed')
             ->with(['items', 'payments.paymentMethod', 'user'])
             ->latest('id');
@@ -270,6 +305,11 @@ class TransactionController extends ApiController
             return $this->errorResponse('Transaksi tidak ditemukan', 404);
         }
 
+        $user = Auth::user();
+        if ($user && !$user->isSuperAdmin() && !$user->hasOutlet($trx->outlet_id)) {
+            return $this->errorResponse('Akses terhadap transaksi cabang ini ditolak.', 403);
+        }
+
         return $this->successResponse($trx, 'Detail transaksi berhasil diambil');
     }
 
@@ -294,13 +334,38 @@ class TransactionController extends ApiController
             return $this->errorResponse('Transaksi ini sudah dibatalkan/void sebelumnya', 400);
         }
 
-        DB::transaction(function () use ($trx, $request) {
+        $user = Auth::user();
+        if ($user && !$user->isSuperAdmin() && !$user->hasOutlet($trx->outlet_id)) {
+            return $this->errorResponse('Akses terhadap transaksi cabang ini ditolak.', 403);
+        }
+
+        // Supervisor authorization check for non-pemilik / non-superadmin
+        $isOwner = $user && ($user->isSuperAdmin() || $user->hasRole('pemilik'));
+        if (!$isOwner) {
+            $authToken = $request->input('supervisor_auth_token') ?: $request->header('X-Supervisor-Token');
+            if (!$authToken) {
+                return $this->errorResponse('Otorisasi PIN Supervisor diperlukan untuk membatalkan transaksi.', 403);
+            }
+
+            $authLog = AuthorizationLog::where('uuid', $authToken)
+                ->where('tenant_id', $user->tenant_id)
+                ->where('outlet_id', $trx->outlet_id)
+                ->where('action_type', 'void')
+                ->where('status', 'approved')
+                ->where('created_at', '>=', Carbon::now()->subMinutes(15))
+                ->first();
+
+            if (!$authLog) {
+                return $this->errorResponse('Token otorisasi supervisor tidak valid atau telah kedaluwarsa.', 403);
+            }
+        }
+
+        DB::transaction(function () use ($trx, $request, $user) {
             $trx->status = 'voided';
             $trx->notes = ($trx->notes ? $trx->notes . ' | ' : '') . 'Void reason: ' . $request->input('reason', 'Pembatalan kasir');
             $trx->save();
 
             // Restore inventory stock
-            $user = Auth::user();
             foreach ($trx->items as $item) {
                 if ($item->inventory_item_id) {
                     $stock = InventoryStock::firstOrCreate([
@@ -367,16 +432,6 @@ class TransactionController extends ApiController
 
     protected function resolveOutletId(Request $request)
     {
-        if ($request->has('current_outlet_id')) {
-            return $request->get('current_outlet_id');
-        }
-        if ($request->has('outlet_id')) {
-            $val = $request->input('outlet_id');
-            $outlet = Outlet::where('id', $val)->orWhere('uuid', $val)->first();
-            return $outlet ? $outlet->id : null;
-        }
-        $user = Auth::user();
-        $defaultOutlet = $user ? $user->defaultOutlet() : null;
-        return $defaultOutlet ? $defaultOutlet->id : null;
+        return $this->resolveAuthorizedOutletId($request);
     }
 }

@@ -12,15 +12,18 @@
 */
 
 Route::get('/', function(){
-  return redirect()->route('login');
-});
-Route::group(['middleware' => ['auth']], function (){
+  return view('landing');
+})->name('landing');
+
+Route::get('/auth/google', 'Auth\GoogleAuthController@redirectToGoogle')->name('auth.google');
+Route::get('/auth/google/callback', 'Auth\GoogleAuthController@handleGoogleCallback')->name('auth.google.callback');
+Route::group(['middleware' => ['auth', 'tenant.scope']], function (){
   //grafikpenjualan
   Route::get('/grafik','laporanController@grafikpenjualan')->name('grafikpenjualan');
   Route::get('/grafik/lihat','laporanController@lihatgrafik')->name('lihatgrafik');
 });
 
-Route::group(['prefix' => 'pemilik', 'middleware' => ['auth','role:pemilik']], function () {
+Route::group(['prefix' => 'pemilik', 'middleware' => ['auth','role:pemilik', 'tenant.scope']], function () {
 	Route::get('/', function(){
 	  return redirect()->route('grafikpenjualan');
 	});
@@ -84,7 +87,7 @@ Route::group(['prefix' => 'pemilik', 'middleware' => ['auth','role:pemilik']], f
 	Route::get('/barang/search', 'PenjagaController@searchbarang')->name('searchbarang');
 });
 
-Route::group(['prefix' => 'penjaga', 'middleware' => ['auth','role:penjaga']], function () {
+Route::group(['prefix' => 'penjaga', 'middleware' => ['auth','role:penjaga', 'tenant.scope']], function () {
 	//
 	Route::get('/', function(){
 	  return redirect()->route('grafikpenjualan');

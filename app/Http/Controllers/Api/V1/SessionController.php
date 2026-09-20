@@ -20,7 +20,7 @@ class SessionController extends ApiController
      */
     public function current(Request $request)
     {
-        $outletId = $this->resolveOutletId($request);
+        $outletId = $this->resolveAuthorizedOutletId($request);
         if (!$outletId) {
             return $this->errorResponse('Outlet ID diperlukan (sediakan header X-Outlet-Id atau parameter outlet_id)', 400);
         }
@@ -65,7 +65,7 @@ class SessionController extends ApiController
             return $this->errorResponse('Validasi gagal', 422, $validator->errors());
         }
 
-        $outletId = $this->resolveOutletId($request);
+        $outletId = $this->resolveAuthorizedOutletId($request);
         if (!$outletId) {
             return $this->errorResponse('Outlet ID diperlukan', 400);
         }
@@ -114,7 +114,7 @@ class SessionController extends ApiController
             return $this->errorResponse('Validasi gagal', 422, $validator->errors());
         }
 
-        $outletId = $this->resolveOutletId($request);
+        $outletId = $this->resolveAuthorizedOutletId($request);
         $session = PosSession::where('outlet_id', $outletId)->where('status', 'open')->latest('id')->first();
 
         if (!$session) {
@@ -158,6 +158,11 @@ class SessionController extends ApiController
 
         if (!$session) {
             return $this->errorResponse('Sesi shift tidak ditemukan', 404);
+        }
+
+        $user = Auth::user();
+        if ($user && !$user->isSuperAdmin() && !$user->hasOutlet($session->outlet_id)) {
+            return $this->errorResponse('Akses terhadap laporan shift cabang ini ditolak.', 403);
         }
 
         $summary = $this->calculateSessionSummary($session);
@@ -225,16 +230,6 @@ class SessionController extends ApiController
 
     protected function resolveOutletId(Request $request)
     {
-        if ($request->has('current_outlet_id')) {
-            return $request->get('current_outlet_id');
-        }
-        if ($request->has('outlet_id')) {
-            $val = $request->input('outlet_id');
-            $outlet = Outlet::where('id', $val)->orWhere('uuid', $val)->first();
-            return $outlet ? $outlet->id : null;
-        }
-        $user = Auth::user();
-        $defaultOutlet = $user ? $user->defaultOutlet() : null;
-        return $defaultOutlet ? $defaultOutlet->id : null;
+        return $this->resolveAuthorizedOutletId($request);
     }
 }

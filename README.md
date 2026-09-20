@@ -38,13 +38,14 @@ The platform uses a **single-database multi-tenant architecture** with automatic
 ```mermaid
 graph TD
     subgraph Clients["1. Client Tier"]
+        LANDING["🌐 Modern Landing Page\n(1-Click Free Google Onboarding)"]
         WEB["🖥️ Web Admin Dashboard\n(Blade / Bootstrap)"]
         RN["📱 Mobile POS Client\n(React Native)"]
         FLUTTER["📱 Mobile POS Client\n(Flutter)"]
     end
 
     subgraph MiddlewareTier["2. Security & SaaS Middleware Tier"]
-        AUTH["🔐 Auth & API Token Guard\n(users.api_token / Session)"]
+        AUTH["🔐 Auth & OAuth Guard\n(Google OAuth / users.api_token / Session)"]
         TENANT["🏢 Tenant Context Resolver\n(TenantScope Injection)"]
         SUBS["💳 Subscription Status Guard\n(Active, Trial, Grace Period, Frozen)"]
         FEATURE["🚦 Feature Gate & Limit Guard\n(BOM, Outlets, User Quotas)"]
@@ -63,6 +64,7 @@ graph TD
         DB[("🗄️ Multi-Tenant Shared Database\n(Isolated by tenant_id & UUIDs)")]
     end
 
+    LANDING --> AUTH
     WEB --> AUTH
     RN --> AUTH
     FLUTTER --> AUTH

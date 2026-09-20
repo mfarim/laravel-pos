@@ -36,17 +36,9 @@ class MobileSyncController extends ApiController
             return $this->errorResponse('Validasi gagal', 422, $validator->errors());
         }
 
-        $outletId = $request->get('current_outlet_id');
+        $outletId = $this->resolveAuthorizedOutletId($request);
         if (!$outletId) {
-            $val = $request->input('outlet_id');
-            $outlet = Outlet::where('id', $val)->orWhere('uuid', $val)->first();
-            $outletId = $outlet ? $outlet->id : null;
-        }
-
-        if (!$outletId) {
-            $user = Auth::user();
-            $def = $user ? $user->defaultOutlet() : null;
-            $outletId = $def ? $def->id : null;
+            return $this->errorResponse('Outlet ID diperlukan', 400);
         }
 
         $outlet = Outlet::find($outletId);
