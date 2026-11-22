@@ -345,6 +345,9 @@ docker compose up -d
 # 👉 http://localhost:8000
 ```
 
+> **🔒 Patched PHP runtime**  
+> PHP 7.4 is end-of-life upstream and the official `php:7.4-apache` image is no longer rebuilt, so it is still vulnerable to PHP2Shell (CVE-2026-109618 / CVE-2026-109619). The image therefore installs PHP 7.4 from [packages.sury.org](https://packages.sury.org/php/), which ships backported security fixes, and the build fails if the package is older than `7.4.33-37`. Run `docker compose build --pull` after new PHP security releases. See [#11](https://github.com/mfarim/laravel-pos/issues/11).
+
 ---
 
 ## 🔑 Default Authentication Credentials
@@ -362,7 +365,7 @@ Pre-seeded credentials covering each operational level:
 ## 💻 Manual Environment Setup (Native)
 
 For bare-metal or local non-Docker development:
-* **PHP**: 7.1 to 7.4 (Required extensions: `pdo_mysql`, `mbstring`, `gd`, `zip`, `xml`, `bcmath`, `json`, `curl`)
+* **PHP**: 7.4 from a vendor build that carries the PHP2Shell backports, e.g. Sury / `ppa:ondrej/php` `7.4.33-37` or newer (Required extensions: `pdo_mysql`, `mbstring`, `gd`, `zip`, `xml`, `bcmath`, `json`, `curl`)
 * **Composer**: 2.2 LTS
 * **Database**: MySQL 5.7+ or MariaDB 10.3+
 

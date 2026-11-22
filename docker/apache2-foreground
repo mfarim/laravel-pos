@@ -1,0 +1,25 @@
+#!/bin/bash
+# Menjalankan Apache di foreground sebagai proses utama container.
+# Setara dengan script apache2-foreground di image resmi php:*-apache.
+set -e
+
+: "${APACHE_CONFDIR:=/etc/apache2}"
+: "${APACHE_ENVVARS:=$APACHE_CONFDIR/envvars}"
+if [ -f "$APACHE_ENVVARS" ]; then
+    # shellcheck source=/dev/null
+    . "$APACHE_ENVVARS"
+fi
+
+# Hapus PID file sisa run sebelumnya (mis. setelah container restart)
+: "${APACHE_RUN_DIR:=/var/run/apache2}"
+: "${APACHE_PID_FILE:=$APACHE_RUN_DIR/apache2.pid}"
+rm -f "$APACHE_PID_FILE"
+
+# Pastikan direktori runtime Apache tersedia
+for dir in "$APACHE_LOCK_DIR" "$APACHE_RUN_DIR" "$APACHE_LOG_DIR"; do
+    if [ -n "$dir" ]; then
+        mkdir -p "$dir"
+    fi
+done
+
+exec apache2 -DFOREGROUND "$@"
